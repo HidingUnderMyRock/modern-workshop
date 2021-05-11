@@ -1,27 +1,27 @@
-# Solutions Engineering Template Repository
+= Solutions Engineering Template Repository
 A template repository that contains all required files (LICENSE, SUPPORT, CONTRIBUTING, etc) as outlined in the org standards.  
 
-## Overview
+== Overview
 This is a workshop to explore kubernetes and docker. 
 
-## Getting Started
+== Getting Started
 The lab are separate and each one will have a folder associated with the tasks. 
 
-## Installation
+== Installation
 We are using UDF, and it is self contained. We are using CentOS 7 with Desktop configuration for this workshop. 
 
-## Community Code of Conduct
-Please refer to the [F5 DevCentral Community Code of Conduct](code_of_conduct.md).
+== Community Code of Conduct
+Please refer to the [F5 DevCentral Community Code of Conduct]<<code_of_conduct.md#,Code of Conduct>>.
 
 
-## License
+== License
 [Apache License 2.0](LICENSE)
 
-## Copyright
+== Copyright
 Copyright 2014-2020 F5 Networks Inc.
 
 
-### F5 Networks Contributor License Agreement
+=== F5 Networks Contributor License Agreement
 
 Before you start contributing to any project sponsored by F5 Networks, Inc. (F5) on GitHub, you will need to sign a Contributor License Agreement (CLA).
 
