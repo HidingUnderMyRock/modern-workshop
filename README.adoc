@@ -11,7 +11,7 @@ The lab are separate and each one will have a folder associated with the tasks.
 We are using UDF, and it is self contained. We are using CentOS 7 with Desktop configuration for this workshop. 
 
 == Community Code of Conduct
-Please refer to the [F5 DevCentral Community Code of Conduct]<<code_of_conduct.md#,Code of Conduct>>.
+Please refer to the [F5 DevCentral Community Code of Conduct]<<code_of_conduct.adoc#,Code of Conduct>>.
 
 
 == License
