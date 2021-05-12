@@ -609,7 +609,7 @@ this is my file
 We do see the text we input in our original file. You can copy any scripts, config files etc. There are other solutions as well where you mount a folder but that is not covered at this time. 
 
 === Build a Container
-Lastly, let create our custom container 
+Lastly, let 's create our custom container 
 
 
 Create a new folder / dir
