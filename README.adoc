@@ -3,6 +3,7 @@ A template repository that contains all required files (LICENSE, SUPPORT, CONTRI
 
 == Overview
 This is a workshop to explore kubernetes and docker. 
+This workshop will use Docker and KIND
 
 == Getting Started
 The lab are separate and each one will have a folder associated with the tasks. 
