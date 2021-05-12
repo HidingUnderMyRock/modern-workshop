@@ -707,7 +707,7 @@ firefox &
 We will now stop the container
 
 ----
-docker stop mycontainer
+docker stop ciao
 ----
 
 verify the container is not running any longer, by reloading the page in firefox and also using docker ps. 
