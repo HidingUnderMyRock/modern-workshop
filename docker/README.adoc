@@ -629,7 +629,12 @@ Edit the file and paste the following:
 <center><h1>Ciao</h1></center>
 ----
 
-Now let's create a new file called Dockerfile. Make sure you have the uppercase D, and add the following:
+Now let's create a new file called Dockerfile. Make sure you have the uppercase D. 
+The files read with the following: values
+* FROM is what image we are going to use to build our container +
+* WORKDIR is the location we want to place our file, since nginx servers in the html we place the file index.html inside that folder. +  
+* COPY this says copy everything from this corrent directory inside the specified folder above. 
+
 ----
 FROM nginx:alpine
 WORKDIR /usr/share/nginx/html
