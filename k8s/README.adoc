@@ -399,11 +399,23 @@ error loading config file " LS0tLS1CRUdJTiBSU0EgUFJJVkFURSBLRVktLS0tLQpNSUlFb3dJ
 
 == Let's check the vscode kube cluster window we will see the nodes there let's verify them with the cli
 
+Open vscode, from the cli type *code*, Since this is an overview, we are not going to use VSCode that much, just wanted to share so you could take advantage of the great plugin offered within the VSCode community. 
+
+image::vscode.png[]
 ----
-kubeclt get nodes
+➜  kubeclt get nodes
 ----
 
-== Build a front and backend 
+OUTPUT: 
+----
+NAME                 STATUS   ROLES                  AGE     VERSION
+kind-control-plane   Ready    control-plane,master   7m14s   v1.20.2
+kind-worker          Ready    <none>                 6m45s   v1.20.2
+kind-worker2         Ready    <none>                 6m46s   v1.20.2
+kind-worker3         Ready    <none>                 6m46s   v1.20.2
+----
+
+== Build a frontend using wordpress and backend using mysql
 Luckily, there is an official tutorial which is pretty well described. We can try most steps of it using kind cluster which we just created.
 link:++https://kubernetes.io/docs/tutorials/stateful-application/mysql-wordpress-persistent-volume/++[Kubernetes Docs]
 
@@ -1056,5 +1068,5 @@ If we want to access a specific worker node where the app is running for the gre
 kubectl port-forward grey-5794d7f866-w8t98 8088:80
 ----
 
-This ends the lab. 
+This ends the lab.  +
 Thanks

@@ -953,15 +953,35 @@ error loading config file " LS0tLS1CRUdJTiBSU0EgUFJJVkFURSBLRVktLS0tLQpNSUlFb3dJ
 <div class="sect1">
 <h2 id="_lets_check_the_vscode_kube_cluster_window_we_will_see_the_nodes_there_lets_verify_them_with_the_cli">Let&#8217;s check the vscode kube cluster window we will see the nodes there let&#8217;s verify them with the cli</h2>
 <div class="sectionbody">
+<div class="paragraph">
+<p>Open vscode, from the cli type <strong>code</strong>, Since this is an overview, we are not going to use VSCode that much, just wanted to share so you could take advantage of the great plugin offered within the VSCode community.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="vscode.png" alt="vscode">
+</div>
+</div>
 <div class="listingblock">
 <div class="content">
-<pre>kubeclt get nodes</pre>
+<pre>➜  kubeclt get nodes</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>OUTPUT:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>NAME                 STATUS   ROLES                  AGE     VERSION
+kind-control-plane   Ready    control-plane,master   7m14s   v1.20.2
+kind-worker          Ready    &lt;none&gt;                 6m45s   v1.20.2
+kind-worker2         Ready    &lt;none&gt;                 6m46s   v1.20.2
+kind-worker3         Ready    &lt;none&gt;                 6m46s   v1.20.2</pre>
 </div>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_build_a_front_and_backend">Build a front and backend</h2>
+<h2 id="_build_a_frontend_using_wordpress_and_backend_using_mysql">Build a frontend using wordpress and backend using mysql</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>Luckily, there is an official tutorial which is pretty well described. We can try most steps of it using kind cluster which we just created.
@@ -1777,7 +1797,7 @@ your application still runs :) even when we scaled down.
 </div>
 </div>
 <div class="paragraph">
-<p>This ends the lab.
+<p>This ends the lab. <br>
 Thanks</p>
 </div>
 </div>
@@ -1785,7 +1805,7 @@ Thanks</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2021-05-14 12:07:01 -0700
+Last updated 2021-05-14 13:34:29 -0700
 </div>
 </div>
 </body>
