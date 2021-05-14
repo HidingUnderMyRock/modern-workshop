@@ -10,7 +10,7 @@ As we get a little more familiar with kind cli, keep in mind that the other tool
 ====
 Shotcut your typing
 ----
-echo  "alias k=kubectl" >>.bashrc 
+echo  "alias k=kubectl" >>~/.bashrc 
 ----
 
 Understand how to use help with kubectl. Each main subcommand has a subset of help. The main will be kubectl -h or kubectl --help. Of course, this workshop is not going through each of the commands, that's something you can explore in your own. We will however cover many of them.  
