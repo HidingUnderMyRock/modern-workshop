@@ -398,7 +398,10 @@ error loading config file " LS0tLS1CRUdJTiBSU0EgUFJJVkFURSBLRVktLS0tLQpNSUlFb3dJ
 ----
 
 == Let's check the vscode kube cluster window we will see the nodes there let's verify them with the cli
+
+----
 kubeclt get nodes
+----
 
 == Build a front and backend 
 Luckily, there is an official tutorial which is pretty well described. We can try most steps of it using kind cluster which we just created.
@@ -623,7 +626,8 @@ resources:
 ----
 
 
-As we have all our files and configuration we will execute them using the kubectl command to start the deployment. Instead of running each command separately, we will leverage the flag -k.
+As we have all our files and configuration we will execute them using the kubectl command to start the deployment. Instead of running each command separately, we will leverage the flag -k. +
+
 NOTE: from the help the -k shows us the following: 
       -k, --kustomize='': Process a kustomization directory. This flag can't be used together with -f or -R.
       --openapi-patch=true: If true, use openapi to calculate diff when the openapi presents and the resource can be

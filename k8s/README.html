@@ -953,8 +953,10 @@ error loading config file " LS0tLS1CRUdJTiBSU0EgUFJJVkFURSBLRVktLS0tLQpNSUlFb3dJ
 <div class="sect1">
 <h2 id="_lets_check_the_vscode_kube_cluster_window_we_will_see_the_nodes_there_lets_verify_them_with_the_cli">Let&#8217;s check the vscode kube cluster window we will see the nodes there let&#8217;s verify them with the cli</h2>
 <div class="sectionbody">
-<div class="paragraph">
-<p>kubeclt get nodes</p>
+<div class="listingblock">
+<div class="content">
+<pre>kubeclt get nodes</pre>
+</div>
 </div>
 </div>
 </div>
@@ -1209,11 +1211,22 @@ resources:
 </div>
 </div>
 <div class="paragraph">
-<p>As we have all our files and configuration we will execute them using the kubectl command to start the deployment. Instead of running each command separately, we will leverage the flag -k.
-NOTE: from the help the -k shows us the following:
+<p>As we have all our files and configuration we will execute them using the kubectl command to start the deployment. Instead of running each command separately, we will leverage the flag -k.<br></p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+from the help the -k shows us the following:
       -k, --kustomize='': Process a kustomization directory. This flag can&#8217;t be used together with -f or -R.
       --openapi-patch=true: If true, use openapi to calculate diff when the openapi presents and the resource can be
-      found in the openapi spec. Otherwise, fall back to use baked-in types.</p>
+      found in the openapi spec. Otherwise, fall back to use baked-in types.
+</td>
+</tr>
+</table>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1772,7 +1785,7 @@ Thanks</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2021-05-14 11:52:31 -0700
+Last updated 2021-05-14 12:01:02 -0700
 </div>
 </div>
 </body>
