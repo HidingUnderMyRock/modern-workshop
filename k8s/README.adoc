@@ -422,6 +422,14 @@ link:++https://kubernetes.io/docs/tutorials/stateful-application/mysql-wordpress
 
 We will create 3 files and add the following data.
 
+First we make a dir/folder
+
+----
+mkdir k8folder
+----
+
+We will cd into the folder k8folder before we do the next steps.  
+
 .You can copy and paste it, which creates a secret and sets a password to f5demo.
 ----
 ➜ cat <<EOF >./kustomization.yaml
