@@ -1,15 +1,20 @@
 = Solutions Engineering Template Repository
-A template repository that contains all required files (LICENSE, SUPPORT, CONTRIBUTING, etc) as outlined in the org standards.  
+A template repository that contains all required files (LICENSE, SUPPORT, CONTRIBUTING, etc) as outlined in the org standards.
 
 == Overview
-This is a workshop to explore kubernetes and docker. 
+This is a workshop to explore kubernetes and docker.
 This workshop will use Docker and KIND
 
+== UDF
+The UDF can be access from the udf.f5.com.
+
+NOTE: The Remote Desktop is enabled for this workshop, one thing to be aware, it takes a min or so to get in the first time.
+
 == Getting Started
-The lab are separate and each one will have a folder associated with the tasks. 
+The lab are separate and each one will have a folder associated with the tasks.
 
 == Installation
-We are using UDF, and it is self contained. We are using CentOS 7 with Desktop configuration for this workshop. 
+We are using UDF, and it is self contained. We are using CentOS 7 with Desktop configuration for this workshop.
 
 == Community Code of Conduct
 Please refer to the [F5 DevCentral Community Code of Conduct]<<code_of_conduct.adoc#,Code of Conduct>>.
