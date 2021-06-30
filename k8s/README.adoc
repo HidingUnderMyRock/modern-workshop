@@ -17,8 +17,11 @@ kubectl completion bash|sed 's/kubectl/k/g' >>.bashrc
 
 Understand how to use help with kubectl. Each main subcommand has a subset of help. The main will be kubectl -h or kubectl --help. Of course, this workshop is not going through each of the commands, that's something you can explore in your own. We will however cover many of them.
 
-Verbose mode, it shows how kubectl makes the API calls. Test it by starting with debug mode 6 and then by checking the debug 7, and debug 8.
-You can also try debug level 9 for more verbose and also level 10 if you really want to see all call. 
+Verbose mode, it shows how kubectl makes the API calls. Test it by starting with debug mode 6 and then by checking the debug 7, and debug 8. +
+
+You can also try debug level 9 for more verbose and also level 10 if you really want to see all call, even it's not listed on this page.
+link:++https://kubernetes.io/docs/reference/kubectl/cheatsheet/++[Kubernetes CheatSheet] +
+
 ----
 kubect get -v6 pods
 ----
