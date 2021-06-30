@@ -1,31 +1,36 @@
 == Kubernetes - Workshop
-This is just an intro, which tights to the presentation of Modern Application. 
+This is just an intro, which tights to the presentation of Modern Application.
 For this workshop we will leverage kind. +
 Kind is a tool for running local Kubernetes clusters using Docker container “nodes”.
 kind was primarily designed for testing Kubernetes itself, but may be used for local development or CI.
 
-We will first build a simple cluster with a specific name. If you omit the flag --name default name will be kind. 
-As we get a little more familiar with kind cli, keep in mind that the other tool we could have selected was minikube, however, kind is newer and allows you to run a small kubernetes cluster for testing and learning purposes. 
+We will first build a simple cluster with a specific name. If you omit the flag --name default name will be kind.
+As we get a little more familiar with kind cli, keep in mind that the other tool we could have selected was minikube, however, kind is newer and allows you to run a small kubernetes cluster for testing and learning purposes.
 
 ====
 Shotcut your typing
 ----
-echo  "alias k=kubectl" >>~/.bashrc 
+echo  "alias k=kubectl" >>~/.bashrc
 kubectl completion bash|sed 's/kubectl/k/g' >>.bashrc
 . .bashrc
 ----
 
-Understand how to use help with kubectl. Each main subcommand has a subset of help. The main will be kubectl -h or kubectl --help. Of course, this workshop is not going through each of the commands, that's something you can explore in your own. We will however cover many of them.  
+Understand how to use help with kubectl. Each main subcommand has a subset of help. The main will be kubectl -h or kubectl --help. Of course, this workshop is not going through each of the commands, that's something you can explore in your own. We will however cover many of them.
 
+Verbose mode, it shows how kubectl makes the API calls. Test it by starting with debug mode 6 and then by checking the debug 7, and debug 8.
+You can also try debug level 9 for more verbose and also level 10 if you really want to see all call. 
+----
+kubect get -v6 pods
+----
 
 Show Merged kubeconfig settings.
----- 
-kubectl config view 
+----
+kubectl config view
 ----
 
 Use multiple kubeconfig files at the same time and view merged config
 ----
-KUBECONFIG=~/.kube/config:~/.kube/kubconfig2 
+KUBECONFIG=~/.kube/config:~/.kube/kubconfig2
 ----
 
 ----
@@ -47,13 +52,13 @@ Set the default context to my-cluster-name, the name can be showed with the comm
 kubectl config use-context <<cluster-name>>
 kubectl config set-context kind-remo
 kubectl config -h <to get some additional help>
-----           
+----
 
 EXAMPLE:  (in my case I have two running, KIND and Minikube, and it shows you which is the default config)
 ----
 kubectl config get-contexts
 CURRENT   NAME        CLUSTER     AUTHINFO    NAMESPACE
-*         kind-kind   kind-kind   kind-kind   
+*         kind-kind   kind-kind   kind-kind
           minikube    minikube    minikube    default
 
 ----
@@ -116,7 +121,7 @@ Use "kind [command] --help" for more information about a command.
 kind create cluster --name workshop
 ----
 
-OUTPUT: 
+OUTPUT:
 ----
 ➜ kind create cluster --name workshop
 Creating cluster "workshop" ...
@@ -139,7 +144,7 @@ Using kind command to verify we have a cluster
 ➜ kind get clusters
 ----
 
-OUTPUT: 
+OUTPUT:
 ----
 ➜ kind get clusters
 workshop
@@ -147,7 +152,7 @@ workshop
 
 Check nodes
 ----
-➜ kubectl get nodes 
+➜ kubectl get nodes
 ----
 
 OUTPUT:  We can see the workshop name for the control plane.
@@ -157,7 +162,7 @@ NAME                     STATUS   ROLES                  AGE   VERSION
 workshop-control-plane   Ready    control-plane,master   11m   v1.20.2
 ----
 
-We will use the describe subcommand to see the details of the node. 
+We will use the describe subcommand to see the details of the node.
 ----
 ➜ kubectl describe no <<your node name>>
 ----
@@ -167,9 +172,9 @@ Example:
 ➜ kubect describe no workshop-control-plane
 ----
 
-NOTE: the option no is short for nodes. 
+NOTE: the option no is short for nodes.
 
-OUTPUT: 
+OUTPUT:
 ----
 ➜ kubectl describe no workshop-control-plane
 Name:               workshop-control-plane
@@ -266,24 +271,24 @@ Events:
   Normal   NodeReady                24m                kubelet     Node workshop-control-plane status is now: NodeReady
 ----
 
-Delete the current kind cluster. If you have the default cluster, named *kind*, you do not have to use the --name option. 
+Delete the current kind cluster. If you have the default cluster, named *kind*, you do not have to use the --name option.
 ----
 kind delete cluster --name workshop
 ----
 
-OUTPUT: 
+OUTPUT:
 ----
 ➜ kind delete cluster --name workshop
 Deleting cluster "workshop" ...
 ----
 
-Create a cluster with 3 workers. create a file, called mykind with the directions below: 
+Create a cluster with 3 workers. create a file, called mykind with the directions below:
 
 ----
 ➜ vi mykind
 ----
 
-Directives for the file mykind. This will build the control plane and 3 workers node.  
+Directives for the file mykind. This will build the control plane and 3 workers node.
 ----
 kind: Cluster
 apiVersion: kind.x-k8s.io/v1alpha4
@@ -305,12 +310,12 @@ nodes:
 ----
 
 
-To build the new cluster with 3 workers and 1 control-plane execute the following: 
----- 
+To build the new cluster with 3 workers and 1 control-plane execute the following:
+----
 kind create cluster --config mykind
 ----
 
-OUTPUT: 
+OUTPUT:
 ----
 ➜ kind create cluster --config mykind
 Creating cluster "kind" ...
@@ -331,7 +336,7 @@ Thanks for using kind! 😊
 
 Check nodes
 ----
-➜ kubectl get nodes 
+➜ kubectl get nodes
 ----
 
 OUTPUT:  We can see the workshop name for the control plane.
@@ -346,12 +351,12 @@ kind-worker3         Ready    <none>                 2m4s    v1.20.2
 
 OUTPUT: with the wide option
 
-As you recall from our docker section, we will check how many containers are running in docker. 
+As you recall from our docker section, we will check how many containers are running in docker.
 ----
 ➜ docker ps
 ----
 
-OUTPUT: 
+OUTPUT:
 ----
 ➜  docker ps
 CONTAINER ID   IMAGE                  COMMAND                  CREATED         STATUS         PORTS                       NAMES
@@ -370,7 +375,7 @@ export KUBECONFIG=”$(kind get kubeconfig)”
 kubectl cluster-info
 ----
 
-OUTPUT: 
+OUTPUT:
 ----
  k cluster-info
 W0512 22:00:22.527953   98101 loader.go:223] Config not found: ”apiVersion,  v1
@@ -401,14 +406,14 @@ error loading config file " LS0tLS1CRUdJTiBSU0EgUFJJVkFURSBLRVktLS0tLQpNSUlFb3dJ
 
 == Let's check the vscode kube cluster window we will see the nodes there let's verify them with the cli
 
-Open vscode, from the cli type *code*, Since this is an overview, we are not going to use VSCode that much, just wanted to share so you could take advantage of the great plugin offered within the VSCode community. 
+Open vscode, from the cli type *code*, Since this is an overview, we are not going to use VSCode that much, just wanted to share so you could take advantage of the great plugin offered within the VSCode community.
 
 image::vscode.png[]
 ----
 ➜  kubeclt get nodes
 ----
 
-OUTPUT: 
+OUTPUT:
 ----
 NAME                 STATUS   ROLES                  AGE     VERSION
 kind-control-plane   Ready    control-plane,master   7m14s   v1.20.2
@@ -430,7 +435,7 @@ First we make a dir/folder
 mkdir k8folder
 ----
 
-We will cd into the folder k8folder before we do the next steps.  
+We will cd into the folder k8folder before we do the next steps.
 
 .You can copy and paste it, which creates a secret and sets a password to f5demo.
 ----
@@ -452,12 +457,12 @@ secretGenerator:
   - password=f5demo
 ----
 
-.Now we will get the mysql deployment, the curl will save the file locally. 
+.Now we will get the mysql deployment, the curl will save the file locally.
 ----
 ➜ curl -LO https://k8s.io/examples/application/wordpress/mysql-deployment.yaml
 ----
 
-OUTPUT: 
+OUTPUT:
 ----
 ➜ curl -LO https://k8s.io/examples/application/wordpress/mysql-deployment.yaml
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
@@ -535,15 +540,15 @@ spec:
         persistentVolumeClaim:
           claimName: mysql-pv-claim
 ----
-We notice the version of MySQL as well as the key for the password. In addition we will be able to see the port used by the container. 
+We notice the version of MySQL as well as the key for the password. In addition we will be able to see the port used by the container.
 
 
-.We will now get the wordpress deployment as well, using curl. 
+.We will now get the wordpress deployment as well, using curl.
 ----
 ➜ curl -LO https://k8s.io/examples/application/wordpress/wordpress-deployment.yaml
 ----
 
-OUTPUT: 
+OUTPUT:
 ----
 ➜ curl -LO https://k8s.io/examples/application/wordpress/wordpress-deployment.yaml
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
@@ -623,10 +628,10 @@ spec:
         persistentVolumeClaim:
           claimName: wp-pv-claim
 ----
-As well as mysql, we can see which port is used and which image is going to be launched for the frontend wordpress. 
+As well as mysql, we can see which port is used and which image is going to be launched for the frontend wordpress.
 
 
-As we have downloaded the two files for our deployment, we will now add the resources into our original file called kustomization. The following data will be appended. 
+As we have downloaded the two files for our deployment, we will now add the resources into our original file called kustomization. The following data will be appended.
 ----
 cat <<EOF >>./kustomization.yaml
 resources:
@@ -650,7 +655,7 @@ resources:
 
 As we have all our files and configuration we will execute them using the kubectl command to start the deployment. Instead of running each command separately, we will leverage the flag -k. +
 
-NOTE: from the help the -k shows us the following: 
+NOTE: from the help the -k shows us the following:
       -k, --kustomize='': Process a kustomization directory. This flag can't be used together with -f or -R.
       --openapi-patch=true: If true, use openapi to calculate diff when the openapi presents and the resource can be
       found in the openapi spec. Otherwise, fall back to use baked-in types.
@@ -660,7 +665,7 @@ NOTE: from the help the -k shows us the following:
 kubectl apply -k ./
 ----
 
-OUTPUT: 
+OUTPUT:
 ----
 ➜ kubectl apply -k .
 secret/mysql-pass-7564dm6k4b created
@@ -672,12 +677,12 @@ persistentvolumeclaim/mysql-pv-claim created
 persistentvolumeclaim/wp-pv-claim created
 ----
 
-Now let's check the secrets. 
+Now let's check the secrets.
 ----
 kubectl get secrets
 ----
 
-OUTPUT: 
+OUTPUT:
 ----
 kubectl get secrets
 NAME                    TYPE                                  DATA   AGE
@@ -685,12 +690,12 @@ default-token-rkcdp     kubernetes.io/service-account-token   3      22h
 mysql-pass-7564dm6k4b   Opaque                                1      79s
 ----
 
-We want to get a little more information from that, therefore, we will run the describe flag. 
+We want to get a little more information from that, therefore, we will run the describe flag.
 ----
 kubectl describe secrets mysql-pass
 ----
 
-OUTPUT: 
+OUTPUT:
 ----
  ➜ kubectl describe secrets mysql-pass
 Name:         mysql-pass-7564dm6k4b
@@ -710,29 +715,29 @@ We do however want to understand storage used on the container we built with K8s
 kubectl get pvc
 ----
 
-OUTPUT: 
+OUTPUT:
 ----
 ➜ kubectl get pvc
 NAME             STATUS   VOLUME                                     CAPACITY   ACCESS MODES   STORAGECLASS   AGE
 mysql-pv-claim   Bound    pvc-c60d5c62-23a8-4866-a2ac-2ce4c0577c8f   20Gi       RWO            standard       8m6s
 wp-pv-claim      Bound    pvc-1266556a-8cad-4afb-821c-aa94f780b9f5   20Gi       RWO            standard       8m6s
 ----
-As we can see the name matches with what's in the describe. 
+As we can see the name matches with what's in the describe.
 
 
-As we have started our deployment, now let's check our pods. The second command is giving you the exact output of the first, however, less typing. 
+As we have started our deployment, now let's check our pods. The second command is giving you the exact output of the first, however, less typing.
 ----
 kubectl get pods (full)
 kubectl get po
 ----
 
-We want to use services in K8s for many reason we have discussed during our presentation, now let's check them. 
+We want to use services in K8s for many reason we have discussed during our presentation, now let's check them.
 ----
 kubectl get services <name of the services>
-kubectl get svc <name of the services > 
+kubectl get svc <name of the services >
 ----
 
-OUTPUT: 
+OUTPUT:
 ----
 kubectl get svc
 NAME              TYPE           CLUSTER-IP     EXTERNAL-IP   PORT(S)        AGE
@@ -741,7 +746,7 @@ wordpress         LoadBalancer   10.96.212.79   <pending>     80:30782/TCP   12m
 wordpress-mysql   ClusterIP      None           <none>        3306/TCP       12m
 ----
 
-The above command shows you what's in the default namespace, if you want or need to check out a specific namespace, then you can use the -A option or -n follow by the namespace name. Furthermore,  
+The above command shows you what's in the default namespace, if you want or need to check out a specific namespace, then you can use the -A option or -n follow by the namespace name. Furthermore,
 
 OUTPUT -A
 ----
@@ -758,7 +763,7 @@ Endpoints are important and therefore we want to get as much data as possible. E
 kubectl get endpoints
 ----
 
-OUTPUT: 
+OUTPUT:
 ----
 ➜ kubectl get endpoints
 NAME              ENDPOINTS         AGE
@@ -766,7 +771,7 @@ kubernetes        172.18.0.4:6443   22h
 wordpress         10.244.1.3:80     15m
 wordpress-mysql   10.244.3.3:3306   15m
 ----
-If we are looking at this, we can detect that each node has it's block, 10.244.1.x for pod 3, 10.244.3.x for pod 2 etc. 
+If we are looking at this, we can detect that each node has it's block, 10.244.1.x for pod 3, 10.244.3.x for pod 2 etc.
 
 To make sure that's the case, let's check to confirm
 ----
@@ -843,26 +848,26 @@ Allocated resources:
   hugepages-2Mi      0 (0%)     0 (0%)
 Events:              <none>
 ----
-NOTE: Check the cidr for that node. 
+NOTE: Check the cidr for that node.
 
-Now we are at the final steps to access our application. As we have talked, there are 3 type in Kubernetes which allows you to access the container. One is NodePort, (not suggested for produciton), default is ClusterIP, which allows communication between the pods, and the last one is LoadBalancer, but we do not have an IPAM which gives us an IP address. Therefore, we will use port-forward to test the application we just span up. 
+Now we are at the final steps to access our application. As we have talked, there are 3 type in Kubernetes which allows you to access the container. One is NodePort, (not suggested for produciton), default is ClusterIP, which allows communication between the pods, and the last one is LoadBalancer, but we do not have an IPAM which gives us an IP address. Therefore, we will use port-forward to test the application we just span up.
 
 ----
 kubectl port-forward svc/wordpress 8000:80
 ----
 
-OUTPUT: 
+OUTPUT:
 ----
 kubectl port-forward svc/wordpress 8000:80
 Forwarding from 127.0.0.1:8000 -> 80
 Forwarding from [::1]:8000 -> 80
 ----
-NOTE: do not break out from the terminal otherwise you will not be able to access the application. Open a new terminal. 
+NOTE: do not break out from the terminal otherwise you will not be able to access the application. Open a new terminal.
 
 
 As we have a MySQL container, and we know there is a password we set let's evaluate the pod. Find the password from the container info
 ----
-kubectl describe po wordpress-mysql (look for the MYSQL_ROOT_PASSWORD). 
+kubectl describe po wordpress-mysql (look for the MYSQL_ROOT_PASSWORD).
 ----
 
 OUTPUT:
@@ -927,7 +932,7 @@ Events:
   Normal  Started    27m   kubelet            Started container mysql
 ----
 
-Now let's open firefox and go to 
+Now let's open firefox and go to
 ----
 localhost:8000
 ----
@@ -935,8 +940,8 @@ Spend a few min configuring your new application. +
 
 
 
-*Optional Lab*, + 
-to see how scale works we will start with one and then scale up and down. 
+*Optional Lab*, +
+to see how scale works we will start with one and then scale up and down.
 
 Scale example: +
 Run a new deployment +
@@ -944,7 +949,7 @@ Run a new deployment +
 kubectl create deployment grey --image=itlinux/httpd_grey
 ----
 
-OUTPUT: 
+OUTPUT:
 ----
 kubectl get deploy
 NAME              READY   UP-TO-DATE   AVAILABLE   AGE
@@ -1017,7 +1022,7 @@ Usage:
 Use "kubectl options" for a list of global command-line options (applies to all commands).
 ----
 
-We notice in the Examples a scale for the deployment. Therefore, we will use a similar one, but first let's check our pods. 
+We notice in the Examples a scale for the deployment. Therefore, we will use a similar one, but first let's check our pods.
 
 .Pods
 ----
@@ -1033,7 +1038,7 @@ We do see there is only one grey pod. Now let's scale up. But before we scale le
 ----
 kubectl port-forward deployment/grey 8222:80
 ----
-Open firefox at 
+Open firefox at
 ----
 localhost:8222
 ----
@@ -1055,12 +1060,12 @@ wordpress-9f58bb5bc-pdn7r         1/1     Running   0          41m
 wordpress-mysql-dd6c4c7c9-mkxfp   1/1     Running   0          41m
 ----
 
-As well as we scaled up we can now scale down. Similar command. 
+As well as we scaled up we can now scale down. Similar command.
 ----
 ➜ kubectl scale --current-replicas=3 --replicas=1 deployment/grey
 ----
 
-OUTPUT: 
+OUTPUT:
 ----
 ➜ kubectl get pods
 NAME                              READY   STATUS        RESTARTS   AGE
@@ -1071,7 +1076,7 @@ wordpress-9f58bb5bc-pdn7r         1/1     Running       0          43m
 wordpress-mysql-dd6c4c7c9-mkxfp   1/1     Running       0          43m
 ----
 
-NOTE: your application still runs :) even when we scaled down. 
+NOTE: your application still runs :) even when we scaled down.
 
 If we want to access a specific worker node where the app is running for the grey app, you can use the following as an example, your id maybe diff:
 ----

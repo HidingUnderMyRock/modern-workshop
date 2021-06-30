@@ -468,6 +468,15 @@ kubectl completion bash|sed 's/kubectl/k/g' &gt;&gt;.bashrc
 <p>Understand how to use help with kubectl. Each main subcommand has a subset of help. The main will be kubectl -h or kubectl --help. Of course, this workshop is not going through each of the commands, that&#8217;s something you can explore in your own. We will however cover many of them.</p>
 </div>
 <div class="paragraph">
+<p>Verbose mode, it shows how kubectl makes the API calls. Test it by starting with debug mode 6 and then by checking the debug 7, and debug 8.
+You can also try debug level 9 for more verbose and also level 10 if you really want to see all call.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>kubect get -v6 pods</pre>
+</div>
+</div>
+<div class="paragraph">
 <p>Show Merged kubeconfig settings.</p>
 </div>
 <div class="listingblock">
@@ -1815,7 +1824,7 @@ Thanks</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2021-06-24 18:57:45 -0700
+Last updated 2021-06-29 21:03:01 -0700
 </div>
 </div>
 </body>
