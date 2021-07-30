@@ -388,9 +388,21 @@ To further debug and diagnose cluster problems, use 'kubectl cluster-info dump'.
 
 == Let's check the vscode kube cluster window we will see the nodes there let's verify them with the cli
 
+Install Vscode, on CentOS 7, the latest version does not work, here is a link to download the version that works.
+----
+https://code.visualstudio.com/updates/v1_52
+----
+
+Once downloaded install it example:
+----
+sudo yum install code-1.52.1-1608137084.el7.x86_64.rpm
+----
+
 Open vscode, from the cli type *code*, Since this is an overview, we are not going to use VSCode that much, just wanted to share so you could take advantage of the great plugin offered within the VSCode community.
 
 image::./vscode.png[]
+
+
 ----
 ➜  k get nodes
 ----
