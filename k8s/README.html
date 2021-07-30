@@ -1323,7 +1323,15 @@ password:  6 bytes</pre>
 </div>
 </div>
 <div class="paragraph">
-<p>We do however want to understand storage used on the container we built with K8s. If you scroll up you will see the reference Volumes and the name used for that container. Therefore, we want to check that out.</p>
+<p>To confirm the value in the POD we will exec into the POD.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>k exec -it wordpress-mysql-5f7dc9d95d-zrzg5 -- env|grep -i pass</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>We do, however want to understand how storage is used on the container, and what we built with K8s. If you scroll up you will see the reference Volumes and the name used for that container. Therefore, we want to check that out.</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1395,7 +1403,7 @@ kube-system   kube-dns          ClusterIP      10.96.0.10     &lt;none&gt;      
 </div>
 </div>
 <div class="paragraph">
-<p>Endpoints are important and therefore we want to get as much data as possible. Example: (ip addresses of the pods)</p>
+<p>Endpoints are important and therefore we want to get as much data as possible. Example: (ip addresses of the pods). If the POD does not have an endpoint there is no svc associated with the pod.</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1818,7 +1826,7 @@ Thanks</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2021-07-30 09:16:21 -0700
+Last updated 2021-07-30 09:25:57 -0700
 </div>
 </div>
 </body>

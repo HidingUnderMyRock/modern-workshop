@@ -697,7 +697,12 @@ Let's get verify the password we set. We will use the jsonpath for this command 
 k get secrets mysql-pass-28kbb7fbdm -o jsonpath="{.data.password}"|base64 --decode
 ----
 
-We do however want to understand storage used on the container we built with K8s. If you scroll up you will see the reference Volumes and the name used for that container. Therefore, we want to check that out.
+To confirm the value in the POD we will exec into the POD.
+----
+k exec -it wordpress-mysql-5f7dc9d95d-zrzg5 -- env|grep -i pass
+----
+
+We do, however want to understand how storage is used on the container, and what we built with K8s. If you scroll up you will see the reference Volumes and the name used for that container. Therefore, we want to check that out.
 ----
 k get pvc,pv
 ----
@@ -749,7 +754,7 @@ default       wordpress-mysql   ClusterIP      None           <none>        3306
 kube-system   kube-dns          ClusterIP      10.96.0.10     <none>        53/UDP,53/TCP,9153/TCP   22h
 ----
 
-Endpoints are important and therefore we want to get as much data as possible. Example: (ip addresses of the pods)
+Endpoints are important and therefore we want to get as much data as possible. Example: (ip addresses of the pods). If the POD does not have an endpoint there is no svc associated with the pod.
 ----
 k get endpoints
 ----
