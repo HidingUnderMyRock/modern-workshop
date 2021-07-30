@@ -11,7 +11,7 @@ As we get a little more familiar with kind cli, keep in mind that the other tool
 Shotcut your typing
 ----
 echo  "alias k=kubectl" >>~/.bashrc
-kubectl completion bash|sed 's/kubectl/k/g' >>.bashrc
+echo "kubectl completion bash|sed s/kubectl/k/g" >>.bashrc
 . .bashrc
 ----
 
@@ -23,12 +23,12 @@ You can also try debug level 9 for more verbosity and also level 10 if you reall
 link:++https://kubernetes.io/docs/reference/kubectl/cheatsheet/++[Kubernetes CheatSheet] +
 
 ----
-kubect get -v6 pods
+k get -v6 pods
 ----
 
 Show Merged kubeconfig settings.
 ----
-kubectl config view
+k config view
 ----
 
 Use multiple kubeconfig files at the same time and view merged config
@@ -37,29 +37,29 @@ KUBECONFIG=~/.kube/config:~/.kube/kubconfig2
 ----
 
 ----
-kubectl config view
+k config view
 ----
 
 Display list of contexts
 ----
-kubectl config get-contexts
+k config get-contexts
 ----
 
 Display the current-context
 ----
-kubectl config current-context
+k config current-context
 ----
 
 Set the default context to my-cluster-name, the name can be showed with the command above.
 ----
-kubectl config use-context <<cluster-name>>
-kubectl config set-context kind-remo
-kubectl config -h <to get some additional help>
+k config use-context <<cluster-name>>
+k config set-context kind-remo
+k config -h <to get some additional help>
 ----
 
 EXAMPLE:  (in my case I have two running, KIND and Minikube, and it shows you which is the default config)
 ----
-kubectl config get-contexts
+k config get-contexts
 CURRENT   NAME        CLUSTER     AUTHINFO    NAMESPACE
 *         kind-kind   kind-kind   kind-kind
           minikube    minikube    minikube    default
@@ -68,22 +68,22 @@ CURRENT   NAME        CLUSTER     AUTHINFO    NAMESPACE
 
 Add a new user to your kubeconf that supports basic auth. We use this example in our Agility Lab, which was offered the last couple of years. link:++https://clouddocs.f5.com/training/community/containers/html/class1/module1/lab1.html++[CIS Lab,window="_blank"]
 ----
-kubectl config set-credentials kubeuser/foo.kubernetes.com --username=kubeuser --password=kubepassword
+k config set-credentials kubeuser/foo.kubernetes.com --username=kubeuser --password=kubepassword
 ----
 
 Permanently save the namespace for all subsequent kubectl commands in that context.
 ----
-kubectl config set-context --current --namespace=ciao
+k config set-context --current --namespace=ciao
 ----
 
 Set a context utilizing a specific username and namespace.
 ----
-kubectl config set-context gce --user=cluster-admin --namespace=ciao \
-  && kubectl config use-context gce
+k config set-context gce --user=cluster-admin --namespace=ciao \
+  && k config use-context gce
 ----
 
 This unsets the config for the user ciao
-kubectl config unset users.ciao
+k config unset users.ciao
 
 ====
 
@@ -137,7 +137,7 @@ Creating cluster "workshop" ...
 Set kubectl context to "kind-workshop"
 You can now use your cluster with:
 
-kubectl cluster-info --context kind-workshop
+k cluster-info --context kind-workshop
 
 Have a nice day! 👋
 ----
@@ -155,7 +155,7 @@ workshop
 
 Check nodes
 ----
-➜ kubectl get nodes
+➜ k get nodes
 ----
 
 OUTPUT:  We can see the workshop name for the control plane.
@@ -167,19 +167,19 @@ workshop-control-plane   Ready    control-plane,master   11m   v1.20.2
 
 We will use the describe subcommand to see the details of the node.
 ----
-➜ kubectl describe no <<your node name>>
+➜ k describe no <<your node name>>
 ----
 
 Example:
 ----
-➜ kubect describe no workshop-control-plane
+➜ k describe no workshop-control-plane
 ----
 
 NOTE: the option no is short for nodes.
 
 OUTPUT:
 ----
-➜ kubectl describe no workshop-control-plane
+➜ k describe no workshop-control-plane
 Name:               workshop-control-plane
 Roles:              control-plane,master
 Labels:             beta.kubernetes.io/arch=amd64
@@ -332,7 +332,7 @@ Creating cluster "kind" ...
 Set kubectl context to "kind-kind"
 You can now use your cluster with:
 
-kubectl cluster-info --context kind-kind
+k cluster-info --context kind-kind
 
 Thanks for using kind! 😊
 ----
@@ -371,49 +371,28 @@ CONTAINER ID   IMAGE                  COMMAND                  CREATED         S
 
 
 
-Once kubectl and kind are ready, open bash console and run these commands.
+Once kubectl and kind are ready, open bash console and run this command.
 
 ----
-export KUBECONFIG=”$(kind get kubeconfig)”
-kubectl cluster-info
+k cluster-info
 ----
 
 OUTPUT:
 ----
- k cluster-info
-W0512 22:00:22.527953   98101 loader.go:223] Config not found: ”apiVersion,  v1
-clusters,
-- cluster,
-    certificate-authority-data,  https, //127.0.0.1, 54190
-  name,  kind-kind
-contexts,
-- context,
-    cluster,  kind-kind
-    user,  kind-kind
-  name,  kind-kind
-current-context,  kind-kind
-kind,  Config
-preferences,  {}
-users,
-- name,  kind-kind
-  user,
-    client-certificate-data
-error loading config file " LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSUM1ekNDQWMrZ0F3SUJBZ0lCQURBTkJna3Foa2lHOXcwQkFRc0ZBREFWTVJNd0VRWURWUVFERXdwcmRXSmwKY201bGRHVnpNQjRYRFRJeE1EVXhNekEwTkRBMU9Gb1hEVE14TURVeE1UQTBOREExT0Zvd0ZURVRNQkVHQTFVRQpBeE1LYTNWaVpYSnVaWFJsY3pDQ0FTSXdEUVlKS29aSWh2Y05BUUVCQlFBRGdnRVBBRENDQVFvQ2dnRUJBT3lpClQrdkxtVkljeGQwT2xNU3VVbGRrRWFaQjNsUm1uRDRSL29ScjVHeFZ5Mksra2VzQ1R3SC9ld2I2ZXp1d3dqQ0UKRUdYR0V1dlJSWWhzbW5lbndzdEJjQmJTR055Vm5DRFRwalVaTXY3K2dxdS91V0FyUTdTWWc3UmZZdmI2dVl5Vwp3aFA5S1N2RXlaTGNWditSalRsci9oQ3lYNm1PQlpEeXgzek9hZFNtcDFZbXI4eS9YdENNajRUekxWWDdxZnR0ClJ4ZUtNMkFMb0NkS1d2cWExSTBHckQ5cWdZTHFGVmxGRWhLM1dlejZPeHhtc0ZpbmVPMDFoZFdKWEpTTWdJM0cKRm11VUhpREtQYTg1VFVXSFlYRlVBZFpjbTFqbXFxMkZpdHVIYXAremxnZ2FXcmg5bFNocmd0Q1IvTUZndzBBNgpsNDhCMXYrN3dZUlVSMElsdm5zQ0F3RUFBYU5DTUVBd0RnWURWUjBQQVFIL0JBUURBZ0trTUE4R0ExVWRFd0VCCi93UUZNQU1CQWY4d0hRWURWUjBPQkJZRUZNMis0SkdNRnNCSUVDZEpZSm1RejBjUCtGMTBNQTBHQ1NxR1NJYjMKRFFFQkN3VUFBNElCQVFDL0s4OGtVakk4V1NZUDBNaGFzN1lTbXZzVnMvL3F5K0JHODRkQTdnUHR4Zi9OSUR1agpQSkxLd0hMU1F4eDZvZ2l1S3VKY21jK0lOZFF1dXREdUphUmh3WklZaitsTS9GMXdJdUI2VjJJQTh2VS8relM4Cm4yTnZJcENrUTlpM0tNbnhBcGlzL2NWb1M2Y3pVZXNlQTB1eVVGWEtjbUpTS2pzdW5aeGFMOGh4Y3ZjcHFlRmUKM3BPRnR4eEcrdnNjN0pIL0xtd2ZGS0R0NXB0QnIzNVRRNzBoUllpMUlnNjQrVkVkRkJ2blZiYUNJaGpDQW5KNQpiaTBkNmxaMTZ6VnJtSnFJR21DNVA2RCs5elRKem1tMzkxUmI5OU9pc2pzRTZFdS9pVkY2NlAzZVFWTnVhazVrCnJ1UGlkaTcwZnZTRjB3TE5qc2NjSllLLzg0Ukp5dmRJSVFTdwotLS0tLUVORCBDRVJUSUZJQ0FURS0tLS0tCg==
-    server": open  LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSUM1ekNDQWMrZ0F3SUJBZ0lCQURBTkJna3Foa2lHOXcwQkFRc0ZBREFWTVJNd0VRWURWUVFERXdwcmRXSmwKY201bGRHVnpNQjRYRFRJeE1EVXhNekEwTkRBMU9Gb1hEVE14TURVeE1UQTBOREExT0Zvd0ZURVRNQkVHQTFVRQpBeE1LYTNWaVpYSnVaWFJsY3pDQ0FTSXdEUVlKS29aSWh2Y05BUUVCQlFBRGdnRVBBRENDQVFvQ2dnRUJBT3lpClQrdkxtVkljeGQwT2xNU3VVbGRrRWFaQjNsUm1uRDRSL29ScjVHeFZ5Mksra2VzQ1R3SC9ld2I2ZXp1d3dqQ0UKRUdYR0V1dlJSWWhzbW5lbndzdEJjQmJTR055Vm5DRFRwalVaTXY3K2dxdS91V0FyUTdTWWc3UmZZdmI2dVl5Vwp3aFA5S1N2RXlaTGNWditSalRsci9oQ3lYNm1PQlpEeXgzek9hZFNtcDFZbXI4eS9YdENNajRUekxWWDdxZnR0ClJ4ZUtNMkFMb0NkS1d2cWExSTBHckQ5cWdZTHFGVmxGRWhLM1dlejZPeHhtc0ZpbmVPMDFoZFdKWEpTTWdJM0cKRm11VUhpREtQYTg1VFVXSFlYRlVBZFpjbTFqbXFxMkZpdHVIYXAremxnZ2FXcmg5bFNocmd0Q1IvTUZndzBBNgpsNDhCMXYrN3dZUlVSMElsdm5zQ0F3RUFBYU5DTUVBd0RnWURWUjBQQVFIL0JBUURBZ0trTUE4R0ExVWRFd0VCCi93UUZNQU1CQWY4d0hRWURWUjBPQkJZRUZNMis0SkdNRnNCSUVDZEpZSm1RejBjUCtGMTBNQTBHQ1NxR1NJYjMKRFFFQkN3VUFBNElCQVFDL0s4OGtVakk4V1NZUDBNaGFzN1lTbXZzVnMvL3F5K0JHODRkQTdnUHR4Zi9OSUR1agpQSkxLd0hMU1F4eDZvZ2l1S3VKY21jK0lOZFF1dXREdUphUmh3WklZaitsTS9GMXdJdUI2VjJJQTh2VS8relM4Cm4yTnZJcENrUTlpM0tNbnhBcGlzL2NWb1M2Y3pVZXNlQTB1eVVGWEtjbUpTS2pzdW5aeGFMOGh4Y3ZjcHFlRmUKM3BPRnR4eEcrdnNjN0pIL0xtd2ZGS0R0NXB0QnIzNVRRNzBoUllpMUlnNjQrVkVkRkJ2blZiYUNJaGpDQW5KNQpiaTBkNmxaMTZ6VnJtSnFJR21DNVA2RCs5elRKem1tMzkxUmI5OU9pc2pzRTZFdS9pVkY2NlAzZVFWTnVhazVrCnJ1UGlkaTcwZnZTRjB3TE5qc2NjSllLLzg0Ukp5dmRJSVFTdwotLS0tLUVORCBDRVJUSUZJQ0FURS0tLS0tCg==
-    server: file name too long
-error loading config file " LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSURFekNDQWZ1Z0F3SUJBZ0lJYktHMGQ3cHJRZ2N3RFFZSktvWklodmNOQVFFTEJRQXdGVEVUTUJFR0ExVUUKQXhNS2EzVmlaWEp1WlhSbGN6QWVGdzB5TVRBMU1UTXdORFF3TlRoYUZ3MHlNakExTVRNd05EUXhNREZhTURReApGekFWQmdOVkJBb1REbk41YzNSbGJUcHRZWE4wWlhKek1Sa3dGd1lEVlFRREV4QnJkV0psY201bGRHVnpMV0ZrCmJXbHVNSUlCSWpBTkJna3Foa2lHOXcwQkFRRUZBQU9DQVE4QU1JSUJDZ0tDQVFFQTJVQU5NYjBCa0NYd1hRVTYKWEROV2V5ams1c1IxNndvNFlNd2NYM3lnbE94WjdmMjZBb3IveTI2TkptMTJib1VqY2cybG0vVWFiQU10RGVDQgpGL1Q2cy9Tdm9SOGNUa0Jya3hNZnZYcHpNZlY4SXRpWDVRR0c2eWd0YnFjaVJ1OFdRM21NNVhScVZudnVNRUE2CllLM2RWK2dQNGdpSGtiVjkvelJSQjdCYlBqd1NPUGJqakFhZW5GR0RsUmV3K1lQZWZMTjFSMzBTNjFsQ0NJK1oKd3VoQ293VFVWR1E2RzNST2dFbzVDOERQdzAxSitsenFLSUt0L3hTcGE2cGVuUEUyOU5Va2JnbXN2bHczbjNMcgovaytBaGlHM1hJNEVPV0pNaDMzR2srUkJySFFOamJvRkxBUWxYRUQ3NDlnT0FtdTZ0RHViTkNwUUR2WDVtSGhUCjl4QXdWUUlEQVFBQm8wZ3dSakFPQmdOVkhROEJBZjhFQkFNQ0JhQXdFd1lEVlIwbEJBd3dDZ1lJS3dZQkJRVUgKQXdJd0h3WURWUjBqQkJnd0ZvQVV6Yjdna1l3V3dFZ1FKMGxnbVpEUFJ3LzRYWFF3RFFZSktvWklodmNOQVFFTApCUUFEZ2dFQkFLUXNaNXY5NHJlVlNmdmZGWlBEbkh1dmF4Tmc4WkJZU3RVdzNmbHdTd2cySTZHZ0kvQVFhNDllCmMxMkNyL2pUcDBuZ3RFWlJ4WGdOcVVDWnQ3RWxlZnVwQzAxeUZtRWxqR2sxMy9rbWp2Vk93VlpjTGpZSXJ1dW8KQ0JGdTJvWnRHUU1DaXA4QlEraTIzaW5QKy9udWJsUGswZzJGemZQNHRwSG5mbzVGQzEyQ0xvTXV1Q2JNK0tSZQovQ1l2NHN5N3JqdGJHTVkrZ2dFRU5CcWFrZDhsL1BEQVM5dG9YQTRYdjJvTDY5OFZMRzBhQVJaTUlIKzJJT291Ci9MeEQ2aXMzTzJHQUFJQUJKQVg2dDhraG0yaU4vL1B6WnhjUmpiK3VaTW1uR1lvVWRVODkzSzJPZ3ZGcUowemkKcWlsZmVLR0NhRXlqbWk5K0VocHU3bElQOE1VVjNLWT0KLS0tLS1FTkQgQ0VSVElGSUNBVEUtLS0tLQo=
-    client-key-data": open  LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSURFekNDQWZ1Z0F3SUJBZ0lJYktHMGQ3cHJRZ2N3RFFZSktvWklodmNOQVFFTEJRQXdGVEVUTUJFR0ExVUUKQXhNS2EzVmlaWEp1WlhSbGN6QWVGdzB5TVRBMU1UTXdORFF3TlRoYUZ3MHlNakExTVRNd05EUXhNREZhTURReApGekFWQmdOVkJBb1REbk41YzNSbGJUcHRZWE4wWlhKek1Sa3dGd1lEVlFRREV4QnJkV0psY201bGRHVnpMV0ZrCmJXbHVNSUlCSWpBTkJna3Foa2lHOXcwQkFRRUZBQU9DQVE4QU1JSUJDZ0tDQVFFQTJVQU5NYjBCa0NYd1hRVTYKWEROV2V5ams1c1IxNndvNFlNd2NYM3lnbE94WjdmMjZBb3IveTI2TkptMTJib1VqY2cybG0vVWFiQU10RGVDQgpGL1Q2cy9Tdm9SOGNUa0Jya3hNZnZYcHpNZlY4SXRpWDVRR0c2eWd0YnFjaVJ1OFdRM21NNVhScVZudnVNRUE2CllLM2RWK2dQNGdpSGtiVjkvelJSQjdCYlBqd1NPUGJqakFhZW5GR0RsUmV3K1lQZWZMTjFSMzBTNjFsQ0NJK1oKd3VoQ293VFVWR1E2RzNST2dFbzVDOERQdzAxSitsenFLSUt0L3hTcGE2cGVuUEUyOU5Va2JnbXN2bHczbjNMcgovaytBaGlHM1hJNEVPV0pNaDMzR2srUkJySFFOamJvRkxBUWxYRUQ3NDlnT0FtdTZ0RHViTkNwUUR2WDVtSGhUCjl4QXdWUUlEQVFBQm8wZ3dSakFPQmdOVkhROEJBZjhFQkFNQ0JhQXdFd1lEVlIwbEJBd3dDZ1lJS3dZQkJRVUgKQXdJd0h3WURWUjBqQkJnd0ZvQVV6Yjdna1l3V3dFZ1FKMGxnbVpEUFJ3LzRYWFF3RFFZSktvWklodmNOQVFFTApCUUFEZ2dFQkFLUXNaNXY5NHJlVlNmdmZGWlBEbkh1dmF4Tmc4WkJZU3RVdzNmbHdTd2cySTZHZ0kvQVFhNDllCmMxMkNyL2pUcDBuZ3RFWlJ4WGdOcVVDWnQ3RWxlZnVwQzAxeUZtRWxqR2sxMy9rbWp2Vk93VlpjTGpZSXJ1dW8KQ0JGdTJvWnRHUU1DaXA4QlEraTIzaW5QKy9udWJsUGswZzJGemZQNHRwSG5mbzVGQzEyQ0xvTXV1Q2JNK0tSZQovQ1l2NHN5N3JqdGJHTVkrZ2dFRU5CcWFrZDhsL1BEQVM5dG9YQTRYdjJvTDY5OFZMRzBhQVJaTUlIKzJJT291Ci9MeEQ2aXMzTzJHQUFJQUJKQVg2dDhraG0yaU4vL1B6WnhjUmpiK3VaTW1uR1lvVWRVODkzSzJPZ3ZGcUowemkKcWlsZmVLR0NhRXlqbWk5K0VocHU3bElQOE1VVjNLWT0KLS0tLS1FTkQgQ0VSVElGSUNBVEUtLS0tLQo=
-    client-key-data: file name too long
-error loading config file " LS0tLS1CRUdJTiBSU0EgUFJJVkFURSBLRVktLS0tLQpNSUlFb3dJQkFBS0NBUUVBMlVBTk1iMEJrQ1h3WFFVNlhETldleWprNXNSMTZ3bzRZTXdjWDN5Z2xPeFo3ZjI2CkFvci95MjZOSm0xMmJvVWpjZzJsbS9VYWJBTXREZUNCRi9UNnMvU3ZvUjhjVGtCcmt4TWZ2WHB6TWZWOEl0aVgKNVFHRzZ5Z3RicWNpUnU4V1EzbU01WFJxVm52dU1FQTZZSzNkVitnUDRnaUhrYlY5L3pSUkI3QmJQandTT1BiagpqQWFlbkZHRGxSZXcrWVBlZkxOMVIzMFM2MWxDQ0krWnd1aENvd1RVVkdRNkczUk9nRW81QzhEUHcwMUorbHpxCktJS3QveFNwYTZwZW5QRTI5TlVrYmdtc3ZsdzNuM0xyL2srQWhpRzNYSTRFT1dKTWgzM0drK1JCckhRTmpib0YKTEFRbFhFRDc0OWdPQW11NnREdWJOQ3BRRHZYNW1IaFQ5eEF3VlFJREFRQUJBb0lCQUZnQVZSZm51dUZjTE9CUgpSTkdpVGc2M2d2bGpiV3lYQ0QxVmtNeXhIQThYS2xwNEk4Zng3Q25JajA2WW1wZXNRSzVyanNEODZRWUZ4MU5PCnRKd3l0UGIrVDhKUmF0TGJ6M2VWRUk5ZE1acDBHU080WHRiNTVtQU5OMUlTUzVVMk5ldUJLaXlzR29NTDBuRWoKSTBLVVN3dlh5YzlDcXorL3A5a2ZwUThiUmVxUUJiT0lNUlNvRFJJU0h3Z0NGbjYrUGpFd0dYQXlBMmo4bWdFcQpmNnQ0Z1hSZm93SlN4cTc3cm5tS3pET2VpTi9NRCs3ZzJpWVhMamk0REpUZjlmNmlwZjdaaXc2cG9nQTFvRFUxCjVJV0FHMWc3WUNSZzQ0dXV3eGNsQ2x3SFJBeHh4THp3NHFZU25RK1l4RUdCZ2dmdERwbzllS0V6bWdRWGs5VHQKbk9SaU51VUNnWUVBNlNRWHpBYnFTaVo2TThqcWs1S0Vsd0J6c2ZBN2l4cFBTdHdmWkY0Wk5RWDV3RkhJanBMawpCNUgza3N5Vzg4eS8wTVpmMVZ4WTlYb3RhSHhPNFMyNmEzY0pVWS9CUEs2RDROcEQ5MXRhMHFZb1FHVlY3RzVsClFCMXdOWm0wODhBbkxCUDEzalRibXF1K1VpNG5OQW5qL0pQQ3pxRXpXdGlqT09taWp4WDQyRWNDZ1lFQTdvMFkKWGZTMkJIVml6M0hBQm5qbHl1Mjg2c1QwR1UzOG1adHRjOEhUZldQS1QydzdvZk5LdE1HTDUydnVIVWlQUlFzTwpFb3FpUFVucHJrelRERzNGWDg5T093aHZ5NUdGazRzeWk2VjhZL2N3UTRwZGs3dC9sM2lmYW4yRktGLzdtSWxtCnp5eHFaMjZBL0lZR3dobDYvN0svL3lXRlc2VmhEZXV5OTkwQVhJTUNnWUVBbXZlY3djZE84RjdIRjZqVEU2aHUKYlppbFRuOXFkTG5XUHVJMkU1YmdsbmdVWEp0Ly9oVHhjWDY2MjE4V2I1T0haSlNYbXRDNWFPSC9VTlpmOEJsZgpNcE43SkRXenNrd2w2TTNzSTMwYno2MFdVRWVMWjQ2eHluNUcyYm9EcDRudi84Sjh5V2pGRi9oVWwzZUtJM0wzCmtpbjljUytCWFQ5bXJ5dk5HK0wwOTMwQ2dZQmJJRVQ5cHp4Y3lhYThUZHluM0VrVDB1dEcxNFBUb3NucXQ4Z0EKM3pyMS9FZk5QVEF1ZG16RVRlY3V1VGtWc0tFaUk4MzFZVVlHbVpTTnc4VWZTMU9KZlB5S2FuZWlVTzJ3NWd5aAo4YzVwdFlTWFdHVFV5Vnc5TlpQWUx5ak51cFMydVU0dnQrelJwQkhiNVNyeHZLQVN5MnF5Z2RmR29ZOUlyUkFKCnhUK2RGd0tCZ0JOTEZJR015NFFYNWhSa0lNa3h4ejd1RUhQRTkwUDdMaDVJcERISllieFNMd0ZKcUNPRmhNcnUKWklhMGFFMEhQVTFaSVlvdTc1a2xxT25mbW9XK0JvdFQ3eXhLNE9IQ1IzejFnemhDSjJNa2JYRDJyRDZkenozQgpjNEt5YzBCZW53VE5vQmp0bXdVaDFEU0RaNmMySHg2WUVSRGVzN3E1c0VEUHB1WE5ETFlSCi0tLS0tRU5EIFJTQSBQUklWQVRFIEtFWS0tLS0tCg==”": open  LS0tLS1CRUdJTiBSU0EgUFJJVkFURSBLRVktLS0tLQpNSUlFb3dJQkFBS0NBUUVBMlVBTk1iMEJrQ1h3WFFVNlhETldleWprNXNSMTZ3bzRZTXdjWDN5Z2xPeFo3ZjI2CkFvci95MjZOSm0xMmJvVWpjZzJsbS9VYWJBTXREZUNCRi9UNnMvU3ZvUjhjVGtCcmt4TWZ2WHB6TWZWOEl0aVgKNVFHRzZ5Z3RicWNpUnU4V1EzbU01WFJxVm52dU1FQTZZSzNkVitnUDRnaUhrYlY5L3pSUkI3QmJQandTT1BiagpqQWFlbkZHRGxSZXcrWVBlZkxOMVIzMFM2MWxDQ0krWnd1aENvd1RVVkdRNkczUk9nRW81QzhEUHcwMUorbHpxCktJS3QveFNwYTZwZW5QRTI5TlVrYmdtc3ZsdzNuM0xyL2srQWhpRzNYSTRFT1dKTWgzM0drK1JCckhRTmpib0YKTEFRbFhFRDc0OWdPQW11NnREdWJOQ3BRRHZYNW1IaFQ5eEF3VlFJREFRQUJBb0lCQUZnQVZSZm51dUZjTE9CUgpSTkdpVGc2M2d2bGpiV3lYQ0QxVmtNeXhIQThYS2xwNEk4Zng3Q25JajA2WW1wZXNRSzVyanNEODZRWUZ4MU5PCnRKd3l0UGIrVDhKUmF0TGJ6M2VWRUk5ZE1acDBHU080WHRiNTVtQU5OMUlTUzVVMk5ldUJLaXlzR29NTDBuRWoKSTBLVVN3dlh5YzlDcXorL3A5a2ZwUThiUmVxUUJiT0lNUlNvRFJJU0h3Z0NGbjYrUGpFd0dYQXlBMmo4bWdFcQpmNnQ0Z1hSZm93SlN4cTc3cm5tS3pET2VpTi9NRCs3ZzJpWVhMamk0REpUZjlmNmlwZjdaaXc2cG9nQTFvRFUxCjVJV0FHMWc3WUNSZzQ0dXV3eGNsQ2x3SFJBeHh4THp3NHFZU25RK1l4RUdCZ2dmdERwbzllS0V6bWdRWGs5VHQKbk9SaU51VUNnWUVBNlNRWHpBYnFTaVo2TThqcWs1S0Vsd0J6c2ZBN2l4cFBTdHdmWkY0Wk5RWDV3RkhJanBMawpCNUgza3N5Vzg4eS8wTVpmMVZ4WTlYb3RhSHhPNFMyNmEzY0pVWS9CUEs2RDROcEQ5MXRhMHFZb1FHVlY3RzVsClFCMXdOWm0wODhBbkxCUDEzalRibXF1K1VpNG5OQW5qL0pQQ3pxRXpXdGlqT09taWp4WDQyRWNDZ1lFQTdvMFkKWGZTMkJIVml6M0hBQm5qbHl1Mjg2c1QwR1UzOG1adHRjOEhUZldQS1QydzdvZk5LdE1HTDUydnVIVWlQUlFzTwpFb3FpUFVucHJrelRERzNGWDg5T093aHZ5NUdGazRzeWk2VjhZL2N3UTRwZGs3dC9sM2lmYW4yRktGLzdtSWxtCnp5eHFaMjZBL0lZR3dobDYvN0svL3lXRlc2VmhEZXV5OTkwQVhJTUNnWUVBbXZlY3djZE84RjdIRjZqVEU2aHUKYlppbFRuOXFkTG5XUHVJMkU1YmdsbmdVWEp0Ly9oVHhjWDY2MjE4V2I1T0haSlNYbXRDNWFPSC9VTlpmOEJsZgpNcE43SkRXenNrd2w2TTNzSTMwYno2MFdVRWVMWjQ2eHluNUcyYm9EcDRudi84Sjh5V2pGRi9oVWwzZUtJM0wzCmtpbjljUytCWFQ5bXJ5dk5HK0wwOTMwQ2dZQmJJRVQ5cHp4Y3lhYThUZHluM0VrVDB1dEcxNFBUb3NucXQ4Z0EKM3pyMS9FZk5QVEF1ZG16RVRlY3V1VGtWc0tFaUk4MzFZVVlHbVpTTnc4VWZTMU9KZlB5S2FuZWlVTzJ3NWd5aAo4YzVwdFlTWFdHVFV5Vnc5TlpQWUx5ak51cFMydVU0dnQrelJwQkhiNVNyeHZLQVN5MnF5Z2RmR29ZOUlyUkFKCnhUK2RGd0tCZ0JOTEZJR015NFFYNWhSa0lNa3h4ejd1RUhQRTkwUDdMaDVJcERISllieFNMd0ZKcUNPRmhNcnUKWklhMGFFMEhQVTFaSVlvdTc1a2xxT25mbW9XK0JvdFQ3eXhLNE9IQ1IzejFnemhDSjJNa2JYRDJyRDZkenozQgpjNEt5YzBCZW53VE5vQmp0bXdVaDFEU0RaNmMySHg2WUVSRGVzN3E1c0VEUHB1WE5ETFlSCi0tLS0tRU5EIFJTQSBQUklWQVRFIEtFWS0tLS0tCg==”: file name too long
+k cluster-info
+Kubernetes control plane is running at https://127.0.0.1:39553
+KubeDNS is running at https://127.0.0.1:39553/api/v1/namespaces/kube-system/services/kube-dns:dns/proxy
+
+To further debug and diagnose cluster problems, use 'kubectl cluster-info dump'.
 ----
 
 == Let's check the vscode kube cluster window we will see the nodes there let's verify them with the cli
 
 Open vscode, from the cli type *code*, Since this is an overview, we are not going to use VSCode that much, just wanted to share so you could take advantage of the great plugin offered within the VSCode community.
 
-image::vscode.png[]
+image::./vscode.png[]
 ----
-➜  kubeclt get nodes
+➜  k get nodes
 ----
 
 OUTPUT:
@@ -474,7 +453,7 @@ OUTPUT:
 100  1193  100  1193    0     0   2475      0 --:--:-- --:--:-- --:--:-- 17289
 ----
 
-READ mysql deployment file
+READ mysql deployment file and change the 20Gi to 10Gi
 ----
 ➜ cat mysql-deployment.yaml
 apiVersion: v1
@@ -560,7 +539,7 @@ OUTPUT:
 100  1278  100  1278    0     0   7139      0 --:--:-- --:--:-- --:--:--  7139
 ----
 
-READ wordpress deployment file
+READ wordpress deployment file and change the 20Gi to 10Gi
 ----
 ➜ cat wordpress-deployment.yaml
 apiVersion: v1
@@ -665,12 +644,12 @@ NOTE: from the help the -k shows us the following:
 
 
 ----
-kubectl apply -k ./
+k apply -k ./
 ----
 
 OUTPUT:
 ----
-➜ kubectl apply -k .
+➜ k apply -k .
 secret/mysql-pass-7564dm6k4b created
 service/wordpress-mysql created
 service/wordpress created
@@ -682,12 +661,12 @@ persistentvolumeclaim/wp-pv-claim created
 
 Now let's check the secrets.
 ----
-kubectl get secrets
+k get secrets
 ----
 
 OUTPUT:
 ----
-kubectl get secrets
+k get secrets
 NAME                    TYPE                                  DATA   AGE
 default-token-rkcdp     kubernetes.io/service-account-token   3      22h
 mysql-pass-7564dm6k4b   Opaque                                1      79s
@@ -695,12 +674,12 @@ mysql-pass-7564dm6k4b   Opaque                                1      79s
 
 We want to get a little more information from that, therefore, we will run the describe flag.
 ----
-kubectl describe secrets mysql-pass
+k describe secrets mysql-pass
 ----
 
 OUTPUT:
 ----
- ➜ kubectl describe secrets mysql-pass
+ ➜ k describe secrets mysql-pass
 Name:         mysql-pass-7564dm6k4b
 Namespace:    default
 Labels:       <none>
@@ -713,36 +692,45 @@ Data
 password:  6 bytes
 ----
 
+Let's get verify the password we set. We will use the jsonpath for this command and base64 to read the data above called password.
+----
+k get secrets mysql-pass-28kbb7fbdm -o jsonpath="{.data.password}"|base64 --decode
+----
+
 We do however want to understand storage used on the container we built with K8s. If you scroll up you will see the reference Volumes and the name used for that container. Therefore, we want to check that out.
 ----
-kubectl get pvc
+k get pvc,pv
 ----
 
 OUTPUT:
 ----
-➜ kubectl get pvc
-NAME             STATUS   VOLUME                                     CAPACITY   ACCESS MODES   STORAGECLASS   AGE
-mysql-pv-claim   Bound    pvc-c60d5c62-23a8-4866-a2ac-2ce4c0577c8f   20Gi       RWO            standard       8m6s
-wp-pv-claim      Bound    pvc-1266556a-8cad-4afb-821c-aa94f780b9f5   20Gi       RWO            standard       8m6s
+k get pvc,pv
+NAME                                   STATUS   VOLUME                                     CAPACITY   ACCESS MODES   STORAGECLASS   AGE
+persistentvolumeclaim/mysql-pv-claim   Bound    pvc-04383fcb-9964-419e-9287-65a6692b7fff   10Gi       RWO            standard       4m21s
+persistentvolumeclaim/wp-pv-claim      Bound    pvc-75b7e03f-d4b4-46e9-8393-c61be247e95f   10Gi       RWO            standard       4m21s
+
+NAME                                                        CAPACITY   ACCESS MODES   RECLAIM POLICY   STATUS   CLAIM                    STORAGECLASS   REASON   AGE
+persistentvolume/pvc-04383fcb-9964-419e-9287-65a6692b7fff   10Gi       RWO            Delete           Bound    default/mysql-pv-claim   standard                4m17s
+persistentvolume/pvc-75b7e03f-d4b4-46e9-8393-c61be247e95f   10Gi       RWO            Delete           Bound    default/wp-pv-claim      standard                4m18s
 ----
 As we can see the name matches with what's in the describe.
 
 
 As we have started our deployment, now let's check our pods. The second command is giving you the exact output of the first, however, less typing.
 ----
-kubectl get pods (full)
-kubectl get po
+k get pods (full)
+k get po
 ----
 
 We want to use services in K8s for many reason we have discussed during our presentation, now let's check them.
 ----
-kubectl get services <name of the services>
-kubectl get svc <name of the services >
+k get services <name of the services>
+k get svc <name of the services >
 ----
 
 OUTPUT:
 ----
-kubectl get svc
+k get svc
 NAME              TYPE           CLUSTER-IP     EXTERNAL-IP   PORT(S)        AGE
 kubernetes        ClusterIP      10.96.0.1      <none>        443/TCP        22h
 wordpress         LoadBalancer   10.96.212.79   <pending>     80:30782/TCP   12m
@@ -753,7 +741,7 @@ The above command shows you what's in the default namespace, if you want or need
 
 OUTPUT -A
 ----
-➜ kubectl get svc -A
+➜ k get svc -A
 NAMESPACE     NAME              TYPE           CLUSTER-IP     EXTERNAL-IP   PORT(S)                  AGE
 default       kubernetes        ClusterIP      10.96.0.1      <none>        443/TCP                  22h
 default       wordpress         LoadBalancer   10.96.212.79   <pending>     80:30782/TCP             12m
@@ -763,12 +751,12 @@ kube-system   kube-dns          ClusterIP      10.96.0.10     <none>        53/U
 
 Endpoints are important and therefore we want to get as much data as possible. Example: (ip addresses of the pods)
 ----
-kubectl get endpoints
+k get endpoints
 ----
 
 OUTPUT:
 ----
-➜ kubectl get endpoints
+➜ k get endpoints
 NAME              ENDPOINTS         AGE
 kubernetes        172.18.0.4:6443   22h
 wordpress         10.244.1.3:80     15m
@@ -778,7 +766,7 @@ If we are looking at this, we can detect that each node has it's block, 10.244.1
 
 To make sure that's the case, let's check to confirm
 ----
- ➜ kubectl describe node kind-worker2
+ ➜ k describe node kind-worker2
 Name:               kind-worker2
 Roles:              <none>
 Labels:             beta.kubernetes.io/arch=amd64
@@ -856,12 +844,12 @@ NOTE: Check the cidr for that node.
 Now we are at the final steps to access our application. As we have talked, there are 3 type in Kubernetes which allows you to access the container. One is NodePort, (not suggested for produciton), default is ClusterIP, which allows communication between the pods, and the last one is LoadBalancer, but we do not have an IPAM which gives us an IP address. Therefore, we will use port-forward to test the application we just span up.
 
 ----
-kubectl port-forward svc/wordpress 8000:80
+k port-forward svc/wordpress 8000:80
 ----
 
 OUTPUT:
 ----
-kubectl port-forward svc/wordpress 8000:80
+k port-forward svc/wordpress 8000:80
 Forwarding from 127.0.0.1:8000 -> 80
 Forwarding from [::1]:8000 -> 80
 ----
@@ -870,12 +858,12 @@ NOTE: do not break out from the terminal otherwise you will not be able to acces
 
 As we have a MySQL container, and we know there is a password we set let's evaluate the pod. Find the password from the container info
 ----
-kubectl describe po wordpress-mysql (look for the MYSQL_ROOT_PASSWORD).
+k describe po wordpress-mysql (look for the MYSQL_ROOT_PASSWORD).
 ----
 
 OUTPUT:
 ----
-➜ kubectl describe po wordpress-mysql
+➜ k describe po wordpress-mysql
 Name:         wordpress-mysql-dd6c4c7c9-mkxfp
 Namespace:    default
 Priority:     0
@@ -949,12 +937,12 @@ to see how scale works we will start with one and then scale up and down.
 Scale example: +
 Run a new deployment +
 ----
-kubectl create deployment grey --image=itlinux/httpd_grey
+k create deployment grey --image=itlinux/httpd_grey
 ----
 
 OUTPUT:
 ----
-kubectl get deploy
+k get deploy
 NAME              READY   UP-TO-DATE   AVAILABLE   AGE
 grey              1/1     1            0           13s
 wordpress         1/1     1            1           36m
@@ -963,12 +951,12 @@ wordpress-mysql   1/1     1            1           36m
 
 Now let's levarage help
 ----
-kubectl scale -h
+k scale -h
 ----
 
 OUTPUT:
 ----
-➜ kubectl scale -h
+➜ k scale -h
 Set a new size for a Deployment, ReplicaSet, Replication Controller, or StatefulSet.
 
  Scale also allows users to specify one or more preconditions for the scale action.
@@ -1029,7 +1017,7 @@ We notice in the Examples a scale for the deployment. Therefore, we will use a s
 
 .Pods
 ----
-➜ kubectl get pods
+➜ k get pods
 NAME                              READY   STATUS    RESTARTS   AGE
 grey-664f87894f-zr52n             1/1     Running   0          3m12s
 wordpress-9f58bb5bc-pdn7r         1/1     Running   0          39m
@@ -1039,7 +1027,7 @@ wordpress-mysql-dd6c4c7c9-mkxfp   1/1     Running   0          39m
 We do see there is only one grey pod. Now let's scale up. But before we scale let's make sure we can access the new container.
 
 ----
-kubectl port-forward deployment/grey 8222:80
+k port-forward deployment/grey 8222:80
 ----
 Open firefox at
 ----
@@ -1048,13 +1036,13 @@ localhost:8222
 
 .Scale our Pod
 ----
-➜ kubectl scale --current-replicas=1 --replicas=3 deployment/grey
+➜ k scale --current-replicas=1 --replicas=3 deployment/grey
 ----
 
 Now let's check pods again.
 .Pods
 ----
-➜ kubectl get pods
+➜ k get pods
 NAME                              READY   STATUS    RESTARTS   AGE
 grey-664f87894f-542xl             1/1     Running   0          13s
 grey-664f87894f-8wvm5             1/1     Running   0          13s
@@ -1065,12 +1053,12 @@ wordpress-mysql-dd6c4c7c9-mkxfp   1/1     Running   0          41m
 
 As well as we scaled up we can now scale down. Similar command.
 ----
-➜ kubectl scale --current-replicas=3 --replicas=1 deployment/grey
+➜ k scale --current-replicas=3 --replicas=1 deployment/grey
 ----
 
 OUTPUT:
 ----
-➜ kubectl get pods
+➜ k get pods
 NAME                              READY   STATUS        RESTARTS   AGE
 grey-664f87894f-542xl             1/1     Running       0          2m13s
 grey-664f87894f-8wvm5             1/1     Terminating   0          2m13s
@@ -1083,7 +1071,7 @@ NOTE: your application still runs :) even when we scaled down.
 
 If we want to access a specific worker node where the app is running for the grey app, you can use the following as an example, your id maybe diff:
 ----
-kubectl port-forward grey-5794d7f866-w8t98 8088:80
+k port-forward grey-5794d7f866-w8t98 8088:80
 ----
 
 This ends the lab.  +

@@ -460,7 +460,7 @@ As we get a little more familiar with kind cli, keep in mind that the other tool
 <div class="listingblock">
 <div class="content">
 <pre>echo  "alias k=kubectl" &gt;&gt;~/.bashrc
-kubectl completion bash|sed 's/kubectl/k/g' &gt;&gt;.bashrc
+echo "kubectl completion bash|sed s/kubectl/k/g" &gt;&gt;.bashrc
 . .bashrc</pre>
 </div>
 </div>
@@ -476,7 +476,7 @@ kubectl completion bash|sed 's/kubectl/k/g' &gt;&gt;.bashrc
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>kubect get -v6 pods</pre>
+<pre>k get -v6 pods</pre>
 </div>
 </div>
 <div class="paragraph">
@@ -484,7 +484,7 @@ kubectl completion bash|sed 's/kubectl/k/g' &gt;&gt;.bashrc
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>kubectl config view</pre>
+<pre>k config view</pre>
 </div>
 </div>
 <div class="paragraph">
@@ -497,7 +497,7 @@ kubectl completion bash|sed 's/kubectl/k/g' &gt;&gt;.bashrc
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>kubectl config view</pre>
+<pre>k config view</pre>
 </div>
 </div>
 <div class="paragraph">
@@ -505,7 +505,7 @@ kubectl completion bash|sed 's/kubectl/k/g' &gt;&gt;.bashrc
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>kubectl config get-contexts</pre>
+<pre>k config get-contexts</pre>
 </div>
 </div>
 <div class="paragraph">
@@ -513,7 +513,7 @@ kubectl completion bash|sed 's/kubectl/k/g' &gt;&gt;.bashrc
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>kubectl config current-context</pre>
+<pre>k config current-context</pre>
 </div>
 </div>
 <div class="paragraph">
@@ -521,9 +521,9 @@ kubectl completion bash|sed 's/kubectl/k/g' &gt;&gt;.bashrc
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>kubectl config use-context &lt;&lt;cluster-name&gt;&gt;
-kubectl config set-context kind-remo
-kubectl config -h &lt;to get some additional help&gt;</pre>
+<pre>k config use-context &lt;&lt;cluster-name&gt;&gt;
+k config set-context kind-remo
+k config -h &lt;to get some additional help&gt;</pre>
 </div>
 </div>
 <div class="paragraph">
@@ -531,7 +531,7 @@ kubectl config -h &lt;to get some additional help&gt;</pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>kubectl config get-contexts
+<pre>k config get-contexts
 CURRENT   NAME        CLUSTER     AUTHINFO    NAMESPACE
 *         kind-kind   kind-kind   kind-kind
           minikube    minikube    minikube    default</pre>
@@ -542,7 +542,7 @@ CURRENT   NAME        CLUSTER     AUTHINFO    NAMESPACE
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>kubectl config set-credentials kubeuser/foo.kubernetes.com --username=kubeuser --password=kubepassword</pre>
+<pre>k config set-credentials kubeuser/foo.kubernetes.com --username=kubeuser --password=kubepassword</pre>
 </div>
 </div>
 <div class="paragraph">
@@ -550,7 +550,7 @@ CURRENT   NAME        CLUSTER     AUTHINFO    NAMESPACE
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>kubectl config set-context --current --namespace=ciao</pre>
+<pre>k config set-context --current --namespace=ciao</pre>
 </div>
 </div>
 <div class="paragraph">
@@ -558,13 +558,13 @@ CURRENT   NAME        CLUSTER     AUTHINFO    NAMESPACE
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>kubectl config set-context gce --user=cluster-admin --namespace=ciao \
-  &amp;&amp; kubectl config use-context gce</pre>
+<pre>k config set-context gce --user=cluster-admin --namespace=ciao \
+  &amp;&amp; k config use-context gce</pre>
 </div>
 </div>
 <div class="paragraph">
 <p>This unsets the config for the user ciao
-kubectl config unset users.ciao</p>
+k config unset users.ciao</p>
 </div>
 </div>
 </div>
@@ -626,7 +626,7 @@ Creating cluster "workshop" ...
 Set kubectl context to "kind-workshop"
 You can now use your cluster with:
 
-kubectl cluster-info --context kind-workshop
+k cluster-info --context kind-workshop
 
 Have a nice day! 👋</pre>
 </div>
@@ -653,7 +653,7 @@ workshop</pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>➜ kubectl get nodes</pre>
+<pre>➜ k get nodes</pre>
 </div>
 </div>
 <div class="paragraph">
@@ -671,7 +671,7 @@ workshop-control-plane   Ready    control-plane,master   11m   v1.20.2</pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>➜ kubectl describe no &lt;&lt;your node name&gt;&gt;</pre>
+<pre>➜ k describe no &lt;&lt;your node name&gt;&gt;</pre>
 </div>
 </div>
 <div class="paragraph">
@@ -679,7 +679,7 @@ workshop-control-plane   Ready    control-plane,master   11m   v1.20.2</pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>➜ kubect describe no workshop-control-plane</pre>
+<pre>➜ k describe no workshop-control-plane</pre>
 </div>
 </div>
 <div class="admonitionblock note">
@@ -699,7 +699,7 @@ the option no is short for nodes.
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>➜ kubectl describe no workshop-control-plane
+<pre>➜ k describe no workshop-control-plane
 Name:               workshop-control-plane
 Roles:              control-plane,master
 Labels:             beta.kubernetes.io/arch=amd64
@@ -868,7 +868,7 @@ Creating cluster "kind" ...
 Set kubectl context to "kind-kind"
 You can now use your cluster with:
 
-kubectl cluster-info --context kind-kind
+k cluster-info --context kind-kind
 
 Thanks for using kind! 😊</pre>
 </div>
@@ -919,12 +919,11 @@ CONTAINER ID   IMAGE                  COMMAND                  CREATED         S
 </div>
 </div>
 <div class="paragraph">
-<p>Once kubectl and kind are ready, open bash console and run these commands.</p>
+<p>Once kubectl and kind are ready, open bash console and run this command.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>export KUBECONFIG=”$(kind get kubeconfig)”
-kubectl cluster-info</pre>
+<pre>k cluster-info</pre>
 </div>
 </div>
 <div class="paragraph">
@@ -932,31 +931,11 @@ kubectl cluster-info</pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre> k cluster-info
-W0512 22:00:22.527953   98101 loader.go:223] Config not found: ”apiVersion,  v1
-clusters,
-- cluster,
-    certificate-authority-data,  https, //127.0.0.1, 54190
-  name,  kind-kind
-contexts,
-- context,
-    cluster,  kind-kind
-    user,  kind-kind
-  name,  kind-kind
-current-context,  kind-kind
-kind,  Config
-preferences,  {}
-users,
-- name,  kind-kind
-  user,
-    client-certificate-data
-error loading config file " LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSUM1ekNDQWMrZ0F3SUJBZ0lCQURBTkJna3Foa2lHOXcwQkFRc0ZBREFWTVJNd0VRWURWUVFERXdwcmRXSmwKY201bGRHVnpNQjRYRFRJeE1EVXhNekEwTkRBMU9Gb1hEVE14TURVeE1UQTBOREExT0Zvd0ZURVRNQkVHQTFVRQpBeE1LYTNWaVpYSnVaWFJsY3pDQ0FTSXdEUVlKS29aSWh2Y05BUUVCQlFBRGdnRVBBRENDQVFvQ2dnRUJBT3lpClQrdkxtVkljeGQwT2xNU3VVbGRrRWFaQjNsUm1uRDRSL29ScjVHeFZ5Mksra2VzQ1R3SC9ld2I2ZXp1d3dqQ0UKRUdYR0V1dlJSWWhzbW5lbndzdEJjQmJTR055Vm5DRFRwalVaTXY3K2dxdS91V0FyUTdTWWc3UmZZdmI2dVl5Vwp3aFA5S1N2RXlaTGNWditSalRsci9oQ3lYNm1PQlpEeXgzek9hZFNtcDFZbXI4eS9YdENNajRUekxWWDdxZnR0ClJ4ZUtNMkFMb0NkS1d2cWExSTBHckQ5cWdZTHFGVmxGRWhLM1dlejZPeHhtc0ZpbmVPMDFoZFdKWEpTTWdJM0cKRm11VUhpREtQYTg1VFVXSFlYRlVBZFpjbTFqbXFxMkZpdHVIYXAremxnZ2FXcmg5bFNocmd0Q1IvTUZndzBBNgpsNDhCMXYrN3dZUlVSMElsdm5zQ0F3RUFBYU5DTUVBd0RnWURWUjBQQVFIL0JBUURBZ0trTUE4R0ExVWRFd0VCCi93UUZNQU1CQWY4d0hRWURWUjBPQkJZRUZNMis0SkdNRnNCSUVDZEpZSm1RejBjUCtGMTBNQTBHQ1NxR1NJYjMKRFFFQkN3VUFBNElCQVFDL0s4OGtVakk4V1NZUDBNaGFzN1lTbXZzVnMvL3F5K0JHODRkQTdnUHR4Zi9OSUR1agpQSkxLd0hMU1F4eDZvZ2l1S3VKY21jK0lOZFF1dXREdUphUmh3WklZaitsTS9GMXdJdUI2VjJJQTh2VS8relM4Cm4yTnZJcENrUTlpM0tNbnhBcGlzL2NWb1M2Y3pVZXNlQTB1eVVGWEtjbUpTS2pzdW5aeGFMOGh4Y3ZjcHFlRmUKM3BPRnR4eEcrdnNjN0pIL0xtd2ZGS0R0NXB0QnIzNVRRNzBoUllpMUlnNjQrVkVkRkJ2blZiYUNJaGpDQW5KNQpiaTBkNmxaMTZ6VnJtSnFJR21DNVA2RCs5elRKem1tMzkxUmI5OU9pc2pzRTZFdS9pVkY2NlAzZVFWTnVhazVrCnJ1UGlkaTcwZnZTRjB3TE5qc2NjSllLLzg0Ukp5dmRJSVFTdwotLS0tLUVORCBDRVJUSUZJQ0FURS0tLS0tCg==
-    server": open  LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSUM1ekNDQWMrZ0F3SUJBZ0lCQURBTkJna3Foa2lHOXcwQkFRc0ZBREFWTVJNd0VRWURWUVFERXdwcmRXSmwKY201bGRHVnpNQjRYRFRJeE1EVXhNekEwTkRBMU9Gb1hEVE14TURVeE1UQTBOREExT0Zvd0ZURVRNQkVHQTFVRQpBeE1LYTNWaVpYSnVaWFJsY3pDQ0FTSXdEUVlKS29aSWh2Y05BUUVCQlFBRGdnRVBBRENDQVFvQ2dnRUJBT3lpClQrdkxtVkljeGQwT2xNU3VVbGRrRWFaQjNsUm1uRDRSL29ScjVHeFZ5Mksra2VzQ1R3SC9ld2I2ZXp1d3dqQ0UKRUdYR0V1dlJSWWhzbW5lbndzdEJjQmJTR055Vm5DRFRwalVaTXY3K2dxdS91V0FyUTdTWWc3UmZZdmI2dVl5Vwp3aFA5S1N2RXlaTGNWditSalRsci9oQ3lYNm1PQlpEeXgzek9hZFNtcDFZbXI4eS9YdENNajRUekxWWDdxZnR0ClJ4ZUtNMkFMb0NkS1d2cWExSTBHckQ5cWdZTHFGVmxGRWhLM1dlejZPeHhtc0ZpbmVPMDFoZFdKWEpTTWdJM0cKRm11VUhpREtQYTg1VFVXSFlYRlVBZFpjbTFqbXFxMkZpdHVIYXAremxnZ2FXcmg5bFNocmd0Q1IvTUZndzBBNgpsNDhCMXYrN3dZUlVSMElsdm5zQ0F3RUFBYU5DTUVBd0RnWURWUjBQQVFIL0JBUURBZ0trTUE4R0ExVWRFd0VCCi93UUZNQU1CQWY4d0hRWURWUjBPQkJZRUZNMis0SkdNRnNCSUVDZEpZSm1RejBjUCtGMTBNQTBHQ1NxR1NJYjMKRFFFQkN3VUFBNElCQVFDL0s4OGtVakk4V1NZUDBNaGFzN1lTbXZzVnMvL3F5K0JHODRkQTdnUHR4Zi9OSUR1agpQSkxLd0hMU1F4eDZvZ2l1S3VKY21jK0lOZFF1dXREdUphUmh3WklZaitsTS9GMXdJdUI2VjJJQTh2VS8relM4Cm4yTnZJcENrUTlpM0tNbnhBcGlzL2NWb1M2Y3pVZXNlQTB1eVVGWEtjbUpTS2pzdW5aeGFMOGh4Y3ZjcHFlRmUKM3BPRnR4eEcrdnNjN0pIL0xtd2ZGS0R0NXB0QnIzNVRRNzBoUllpMUlnNjQrVkVkRkJ2blZiYUNJaGpDQW5KNQpiaTBkNmxaMTZ6VnJtSnFJR21DNVA2RCs5elRKem1tMzkxUmI5OU9pc2pzRTZFdS9pVkY2NlAzZVFWTnVhazVrCnJ1UGlkaTcwZnZTRjB3TE5qc2NjSllLLzg0Ukp5dmRJSVFTdwotLS0tLUVORCBDRVJUSUZJQ0FURS0tLS0tCg==
-    server: file name too long
-error loading config file " LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSURFekNDQWZ1Z0F3SUJBZ0lJYktHMGQ3cHJRZ2N3RFFZSktvWklodmNOQVFFTEJRQXdGVEVUTUJFR0ExVUUKQXhNS2EzVmlaWEp1WlhSbGN6QWVGdzB5TVRBMU1UTXdORFF3TlRoYUZ3MHlNakExTVRNd05EUXhNREZhTURReApGekFWQmdOVkJBb1REbk41YzNSbGJUcHRZWE4wWlhKek1Sa3dGd1lEVlFRREV4QnJkV0psY201bGRHVnpMV0ZrCmJXbHVNSUlCSWpBTkJna3Foa2lHOXcwQkFRRUZBQU9DQVE4QU1JSUJDZ0tDQVFFQTJVQU5NYjBCa0NYd1hRVTYKWEROV2V5ams1c1IxNndvNFlNd2NYM3lnbE94WjdmMjZBb3IveTI2TkptMTJib1VqY2cybG0vVWFiQU10RGVDQgpGL1Q2cy9Tdm9SOGNUa0Jya3hNZnZYcHpNZlY4SXRpWDVRR0c2eWd0YnFjaVJ1OFdRM21NNVhScVZudnVNRUE2CllLM2RWK2dQNGdpSGtiVjkvelJSQjdCYlBqd1NPUGJqakFhZW5GR0RsUmV3K1lQZWZMTjFSMzBTNjFsQ0NJK1oKd3VoQ293VFVWR1E2RzNST2dFbzVDOERQdzAxSitsenFLSUt0L3hTcGE2cGVuUEUyOU5Va2JnbXN2bHczbjNMcgovaytBaGlHM1hJNEVPV0pNaDMzR2srUkJySFFOamJvRkxBUWxYRUQ3NDlnT0FtdTZ0RHViTkNwUUR2WDVtSGhUCjl4QXdWUUlEQVFBQm8wZ3dSakFPQmdOVkhROEJBZjhFQkFNQ0JhQXdFd1lEVlIwbEJBd3dDZ1lJS3dZQkJRVUgKQXdJd0h3WURWUjBqQkJnd0ZvQVV6Yjdna1l3V3dFZ1FKMGxnbVpEUFJ3LzRYWFF3RFFZSktvWklodmNOQVFFTApCUUFEZ2dFQkFLUXNaNXY5NHJlVlNmdmZGWlBEbkh1dmF4Tmc4WkJZU3RVdzNmbHdTd2cySTZHZ0kvQVFhNDllCmMxMkNyL2pUcDBuZ3RFWlJ4WGdOcVVDWnQ3RWxlZnVwQzAxeUZtRWxqR2sxMy9rbWp2Vk93VlpjTGpZSXJ1dW8KQ0JGdTJvWnRHUU1DaXA4QlEraTIzaW5QKy9udWJsUGswZzJGemZQNHRwSG5mbzVGQzEyQ0xvTXV1Q2JNK0tSZQovQ1l2NHN5N3JqdGJHTVkrZ2dFRU5CcWFrZDhsL1BEQVM5dG9YQTRYdjJvTDY5OFZMRzBhQVJaTUlIKzJJT291Ci9MeEQ2aXMzTzJHQUFJQUJKQVg2dDhraG0yaU4vL1B6WnhjUmpiK3VaTW1uR1lvVWRVODkzSzJPZ3ZGcUowemkKcWlsZmVLR0NhRXlqbWk5K0VocHU3bElQOE1VVjNLWT0KLS0tLS1FTkQgQ0VSVElGSUNBVEUtLS0tLQo=
-    client-key-data": open  LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSURFekNDQWZ1Z0F3SUJBZ0lJYktHMGQ3cHJRZ2N3RFFZSktvWklodmNOQVFFTEJRQXdGVEVUTUJFR0ExVUUKQXhNS2EzVmlaWEp1WlhSbGN6QWVGdzB5TVRBMU1UTXdORFF3TlRoYUZ3MHlNakExTVRNd05EUXhNREZhTURReApGekFWQmdOVkJBb1REbk41YzNSbGJUcHRZWE4wWlhKek1Sa3dGd1lEVlFRREV4QnJkV0psY201bGRHVnpMV0ZrCmJXbHVNSUlCSWpBTkJna3Foa2lHOXcwQkFRRUZBQU9DQVE4QU1JSUJDZ0tDQVFFQTJVQU5NYjBCa0NYd1hRVTYKWEROV2V5ams1c1IxNndvNFlNd2NYM3lnbE94WjdmMjZBb3IveTI2TkptMTJib1VqY2cybG0vVWFiQU10RGVDQgpGL1Q2cy9Tdm9SOGNUa0Jya3hNZnZYcHpNZlY4SXRpWDVRR0c2eWd0YnFjaVJ1OFdRM21NNVhScVZudnVNRUE2CllLM2RWK2dQNGdpSGtiVjkvelJSQjdCYlBqd1NPUGJqakFhZW5GR0RsUmV3K1lQZWZMTjFSMzBTNjFsQ0NJK1oKd3VoQ293VFVWR1E2RzNST2dFbzVDOERQdzAxSitsenFLSUt0L3hTcGE2cGVuUEUyOU5Va2JnbXN2bHczbjNMcgovaytBaGlHM1hJNEVPV0pNaDMzR2srUkJySFFOamJvRkxBUWxYRUQ3NDlnT0FtdTZ0RHViTkNwUUR2WDVtSGhUCjl4QXdWUUlEQVFBQm8wZ3dSakFPQmdOVkhROEJBZjhFQkFNQ0JhQXdFd1lEVlIwbEJBd3dDZ1lJS3dZQkJRVUgKQXdJd0h3WURWUjBqQkJnd0ZvQVV6Yjdna1l3V3dFZ1FKMGxnbVpEUFJ3LzRYWFF3RFFZSktvWklodmNOQVFFTApCUUFEZ2dFQkFLUXNaNXY5NHJlVlNmdmZGWlBEbkh1dmF4Tmc4WkJZU3RVdzNmbHdTd2cySTZHZ0kvQVFhNDllCmMxMkNyL2pUcDBuZ3RFWlJ4WGdOcVVDWnQ3RWxlZnVwQzAxeUZtRWxqR2sxMy9rbWp2Vk93VlpjTGpZSXJ1dW8KQ0JGdTJvWnRHUU1DaXA4QlEraTIzaW5QKy9udWJsUGswZzJGemZQNHRwSG5mbzVGQzEyQ0xvTXV1Q2JNK0tSZQovQ1l2NHN5N3JqdGJHTVkrZ2dFRU5CcWFrZDhsL1BEQVM5dG9YQTRYdjJvTDY5OFZMRzBhQVJaTUlIKzJJT291Ci9MeEQ2aXMzTzJHQUFJQUJKQVg2dDhraG0yaU4vL1B6WnhjUmpiK3VaTW1uR1lvVWRVODkzSzJPZ3ZGcUowemkKcWlsZmVLR0NhRXlqbWk5K0VocHU3bElQOE1VVjNLWT0KLS0tLS1FTkQgQ0VSVElGSUNBVEUtLS0tLQo=
-    client-key-data: file name too long
-error loading config file " LS0tLS1CRUdJTiBSU0EgUFJJVkFURSBLRVktLS0tLQpNSUlFb3dJQkFBS0NBUUVBMlVBTk1iMEJrQ1h3WFFVNlhETldleWprNXNSMTZ3bzRZTXdjWDN5Z2xPeFo3ZjI2CkFvci95MjZOSm0xMmJvVWpjZzJsbS9VYWJBTXREZUNCRi9UNnMvU3ZvUjhjVGtCcmt4TWZ2WHB6TWZWOEl0aVgKNVFHRzZ5Z3RicWNpUnU4V1EzbU01WFJxVm52dU1FQTZZSzNkVitnUDRnaUhrYlY5L3pSUkI3QmJQandTT1BiagpqQWFlbkZHRGxSZXcrWVBlZkxOMVIzMFM2MWxDQ0krWnd1aENvd1RVVkdRNkczUk9nRW81QzhEUHcwMUorbHpxCktJS3QveFNwYTZwZW5QRTI5TlVrYmdtc3ZsdzNuM0xyL2srQWhpRzNYSTRFT1dKTWgzM0drK1JCckhRTmpib0YKTEFRbFhFRDc0OWdPQW11NnREdWJOQ3BRRHZYNW1IaFQ5eEF3VlFJREFRQUJBb0lCQUZnQVZSZm51dUZjTE9CUgpSTkdpVGc2M2d2bGpiV3lYQ0QxVmtNeXhIQThYS2xwNEk4Zng3Q25JajA2WW1wZXNRSzVyanNEODZRWUZ4MU5PCnRKd3l0UGIrVDhKUmF0TGJ6M2VWRUk5ZE1acDBHU080WHRiNTVtQU5OMUlTUzVVMk5ldUJLaXlzR29NTDBuRWoKSTBLVVN3dlh5YzlDcXorL3A5a2ZwUThiUmVxUUJiT0lNUlNvRFJJU0h3Z0NGbjYrUGpFd0dYQXlBMmo4bWdFcQpmNnQ0Z1hSZm93SlN4cTc3cm5tS3pET2VpTi9NRCs3ZzJpWVhMamk0REpUZjlmNmlwZjdaaXc2cG9nQTFvRFUxCjVJV0FHMWc3WUNSZzQ0dXV3eGNsQ2x3SFJBeHh4THp3NHFZU25RK1l4RUdCZ2dmdERwbzllS0V6bWdRWGs5VHQKbk9SaU51VUNnWUVBNlNRWHpBYnFTaVo2TThqcWs1S0Vsd0J6c2ZBN2l4cFBTdHdmWkY0Wk5RWDV3RkhJanBMawpCNUgza3N5Vzg4eS8wTVpmMVZ4WTlYb3RhSHhPNFMyNmEzY0pVWS9CUEs2RDROcEQ5MXRhMHFZb1FHVlY3RzVsClFCMXdOWm0wODhBbkxCUDEzalRibXF1K1VpNG5OQW5qL0pQQ3pxRXpXdGlqT09taWp4WDQyRWNDZ1lFQTdvMFkKWGZTMkJIVml6M0hBQm5qbHl1Mjg2c1QwR1UzOG1adHRjOEhUZldQS1QydzdvZk5LdE1HTDUydnVIVWlQUlFzTwpFb3FpUFVucHJrelRERzNGWDg5T093aHZ5NUdGazRzeWk2VjhZL2N3UTRwZGs3dC9sM2lmYW4yRktGLzdtSWxtCnp5eHFaMjZBL0lZR3dobDYvN0svL3lXRlc2VmhEZXV5OTkwQVhJTUNnWUVBbXZlY3djZE84RjdIRjZqVEU2aHUKYlppbFRuOXFkTG5XUHVJMkU1YmdsbmdVWEp0Ly9oVHhjWDY2MjE4V2I1T0haSlNYbXRDNWFPSC9VTlpmOEJsZgpNcE43SkRXenNrd2w2TTNzSTMwYno2MFdVRWVMWjQ2eHluNUcyYm9EcDRudi84Sjh5V2pGRi9oVWwzZUtJM0wzCmtpbjljUytCWFQ5bXJ5dk5HK0wwOTMwQ2dZQmJJRVQ5cHp4Y3lhYThUZHluM0VrVDB1dEcxNFBUb3NucXQ4Z0EKM3pyMS9FZk5QVEF1ZG16RVRlY3V1VGtWc0tFaUk4MzFZVVlHbVpTTnc4VWZTMU9KZlB5S2FuZWlVTzJ3NWd5aAo4YzVwdFlTWFdHVFV5Vnc5TlpQWUx5ak51cFMydVU0dnQrelJwQkhiNVNyeHZLQVN5MnF5Z2RmR29ZOUlyUkFKCnhUK2RGd0tCZ0JOTEZJR015NFFYNWhSa0lNa3h4ejd1RUhQRTkwUDdMaDVJcERISllieFNMd0ZKcUNPRmhNcnUKWklhMGFFMEhQVTFaSVlvdTc1a2xxT25mbW9XK0JvdFQ3eXhLNE9IQ1IzejFnemhDSjJNa2JYRDJyRDZkenozQgpjNEt5YzBCZW53VE5vQmp0bXdVaDFEU0RaNmMySHg2WUVSRGVzN3E1c0VEUHB1WE5ETFlSCi0tLS0tRU5EIFJTQSBQUklWQVRFIEtFWS0tLS0tCg==”": open  LS0tLS1CRUdJTiBSU0EgUFJJVkFURSBLRVktLS0tLQpNSUlFb3dJQkFBS0NBUUVBMlVBTk1iMEJrQ1h3WFFVNlhETldleWprNXNSMTZ3bzRZTXdjWDN5Z2xPeFo3ZjI2CkFvci95MjZOSm0xMmJvVWpjZzJsbS9VYWJBTXREZUNCRi9UNnMvU3ZvUjhjVGtCcmt4TWZ2WHB6TWZWOEl0aVgKNVFHRzZ5Z3RicWNpUnU4V1EzbU01WFJxVm52dU1FQTZZSzNkVitnUDRnaUhrYlY5L3pSUkI3QmJQandTT1BiagpqQWFlbkZHRGxSZXcrWVBlZkxOMVIzMFM2MWxDQ0krWnd1aENvd1RVVkdRNkczUk9nRW81QzhEUHcwMUorbHpxCktJS3QveFNwYTZwZW5QRTI5TlVrYmdtc3ZsdzNuM0xyL2srQWhpRzNYSTRFT1dKTWgzM0drK1JCckhRTmpib0YKTEFRbFhFRDc0OWdPQW11NnREdWJOQ3BRRHZYNW1IaFQ5eEF3VlFJREFRQUJBb0lCQUZnQVZSZm51dUZjTE9CUgpSTkdpVGc2M2d2bGpiV3lYQ0QxVmtNeXhIQThYS2xwNEk4Zng3Q25JajA2WW1wZXNRSzVyanNEODZRWUZ4MU5PCnRKd3l0UGIrVDhKUmF0TGJ6M2VWRUk5ZE1acDBHU080WHRiNTVtQU5OMUlTUzVVMk5ldUJLaXlzR29NTDBuRWoKSTBLVVN3dlh5YzlDcXorL3A5a2ZwUThiUmVxUUJiT0lNUlNvRFJJU0h3Z0NGbjYrUGpFd0dYQXlBMmo4bWdFcQpmNnQ0Z1hSZm93SlN4cTc3cm5tS3pET2VpTi9NRCs3ZzJpWVhMamk0REpUZjlmNmlwZjdaaXc2cG9nQTFvRFUxCjVJV0FHMWc3WUNSZzQ0dXV3eGNsQ2x3SFJBeHh4THp3NHFZU25RK1l4RUdCZ2dmdERwbzllS0V6bWdRWGs5VHQKbk9SaU51VUNnWUVBNlNRWHpBYnFTaVo2TThqcWs1S0Vsd0J6c2ZBN2l4cFBTdHdmWkY0Wk5RWDV3RkhJanBMawpCNUgza3N5Vzg4eS8wTVpmMVZ4WTlYb3RhSHhPNFMyNmEzY0pVWS9CUEs2RDROcEQ5MXRhMHFZb1FHVlY3RzVsClFCMXdOWm0wODhBbkxCUDEzalRibXF1K1VpNG5OQW5qL0pQQ3pxRXpXdGlqT09taWp4WDQyRWNDZ1lFQTdvMFkKWGZTMkJIVml6M0hBQm5qbHl1Mjg2c1QwR1UzOG1adHRjOEhUZldQS1QydzdvZk5LdE1HTDUydnVIVWlQUlFzTwpFb3FpUFVucHJrelRERzNGWDg5T093aHZ5NUdGazRzeWk2VjhZL2N3UTRwZGs3dC9sM2lmYW4yRktGLzdtSWxtCnp5eHFaMjZBL0lZR3dobDYvN0svL3lXRlc2VmhEZXV5OTkwQVhJTUNnWUVBbXZlY3djZE84RjdIRjZqVEU2aHUKYlppbFRuOXFkTG5XUHVJMkU1YmdsbmdVWEp0Ly9oVHhjWDY2MjE4V2I1T0haSlNYbXRDNWFPSC9VTlpmOEJsZgpNcE43SkRXenNrd2w2TTNzSTMwYno2MFdVRWVMWjQ2eHluNUcyYm9EcDRudi84Sjh5V2pGRi9oVWwzZUtJM0wzCmtpbjljUytCWFQ5bXJ5dk5HK0wwOTMwQ2dZQmJJRVQ5cHp4Y3lhYThUZHluM0VrVDB1dEcxNFBUb3NucXQ4Z0EKM3pyMS9FZk5QVEF1ZG16RVRlY3V1VGtWc0tFaUk4MzFZVVlHbVpTTnc4VWZTMU9KZlB5S2FuZWlVTzJ3NWd5aAo4YzVwdFlTWFdHVFV5Vnc5TlpQWUx5ak51cFMydVU0dnQrelJwQkhiNVNyeHZLQVN5MnF5Z2RmR29ZOUlyUkFKCnhUK2RGd0tCZ0JOTEZJR015NFFYNWhSa0lNa3h4ejd1RUhQRTkwUDdMaDVJcERISllieFNMd0ZKcUNPRmhNcnUKWklhMGFFMEhQVTFaSVlvdTc1a2xxT25mbW9XK0JvdFQ3eXhLNE9IQ1IzejFnemhDSjJNa2JYRDJyRDZkenozQgpjNEt5YzBCZW53VE5vQmp0bXdVaDFEU0RaNmMySHg2WUVSRGVzN3E1c0VEUHB1WE5ETFlSCi0tLS0tRU5EIFJTQSBQUklWQVRFIEtFWS0tLS0tCg==”: file name too long</pre>
+<pre>k cluster-info
+Kubernetes control plane is running at https://127.0.0.1:39553
+KubeDNS is running at https://127.0.0.1:39553/api/v1/namespaces/kube-system/services/kube-dns:dns/proxy
+
+To further debug and diagnose cluster problems, use 'kubectl cluster-info dump'.</pre>
 </div>
 </div>
 </div>
@@ -969,12 +948,12 @@ error loading config file " LS0tLS1CRUdJTiBSU0EgUFJJVkFURSBLRVktLS0tLQpNSUlFb3dJ
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="vscode.png" alt="vscode">
+<img src="./vscode.png" alt="vscode">
 </div>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>➜  kubeclt get nodes</pre>
+<pre>➜  k get nodes</pre>
 </div>
 </div>
 <div class="paragraph">
@@ -1054,7 +1033,7 @@ secretGenerator:
 </div>
 </div>
 <div class="paragraph">
-<p>READ mysql deployment file</p>
+<p>READ mysql deployment file and change the 20Gi to 10Gi</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1148,7 +1127,7 @@ spec:
 </div>
 </div>
 <div class="paragraph">
-<p>READ wordpress deployment file</p>
+<p>READ wordpress deployment file and change the 20Gi to 10Gi</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1272,7 +1251,7 @@ from the help the -k shows us the following:
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>kubectl apply -k ./</pre>
+<pre>k apply -k ./</pre>
 </div>
 </div>
 <div class="paragraph">
@@ -1280,7 +1259,7 @@ from the help the -k shows us the following:
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>➜ kubectl apply -k .
+<pre>➜ k apply -k .
 secret/mysql-pass-7564dm6k4b created
 service/wordpress-mysql created
 service/wordpress created
@@ -1295,7 +1274,7 @@ persistentvolumeclaim/wp-pv-claim created</pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>kubectl get secrets</pre>
+<pre>k get secrets</pre>
 </div>
 </div>
 <div class="paragraph">
@@ -1303,7 +1282,7 @@ persistentvolumeclaim/wp-pv-claim created</pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>kubectl get secrets
+<pre>k get secrets
 NAME                    TYPE                                  DATA   AGE
 default-token-rkcdp     kubernetes.io/service-account-token   3      22h
 mysql-pass-7564dm6k4b   Opaque                                1      79s</pre>
@@ -1314,7 +1293,7 @@ mysql-pass-7564dm6k4b   Opaque                                1      79s</pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>kubectl describe secrets mysql-pass</pre>
+<pre>k describe secrets mysql-pass</pre>
 </div>
 </div>
 <div class="paragraph">
@@ -1322,7 +1301,7 @@ mysql-pass-7564dm6k4b   Opaque                                1      79s</pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre> ➜ kubectl describe secrets mysql-pass
+<pre> ➜ k describe secrets mysql-pass
 Name:         mysql-pass-7564dm6k4b
 Namespace:    default
 Labels:       &lt;none&gt;
@@ -1336,11 +1315,19 @@ password:  6 bytes</pre>
 </div>
 </div>
 <div class="paragraph">
+<p>Let&#8217;s get verify the password we set. We will use the jsonpath for this command and base64 to read the data above called password.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>k get secrets mysql-pass-28kbb7fbdm -o jsonpath="{.data.password}"|base64 --decode</pre>
+</div>
+</div>
+<div class="paragraph">
 <p>We do however want to understand storage used on the container we built with K8s. If you scroll up you will see the reference Volumes and the name used for that container. Therefore, we want to check that out.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>kubectl get pvc</pre>
+<pre>k get pvc,pv</pre>
 </div>
 </div>
 <div class="paragraph">
@@ -1348,10 +1335,14 @@ password:  6 bytes</pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>➜ kubectl get pvc
-NAME             STATUS   VOLUME                                     CAPACITY   ACCESS MODES   STORAGECLASS   AGE
-mysql-pv-claim   Bound    pvc-c60d5c62-23a8-4866-a2ac-2ce4c0577c8f   20Gi       RWO            standard       8m6s
-wp-pv-claim      Bound    pvc-1266556a-8cad-4afb-821c-aa94f780b9f5   20Gi       RWO            standard       8m6s</pre>
+<pre>k get pvc,pv
+NAME                                   STATUS   VOLUME                                     CAPACITY   ACCESS MODES   STORAGECLASS   AGE
+persistentvolumeclaim/mysql-pv-claim   Bound    pvc-04383fcb-9964-419e-9287-65a6692b7fff   10Gi       RWO            standard       4m21s
+persistentvolumeclaim/wp-pv-claim      Bound    pvc-75b7e03f-d4b4-46e9-8393-c61be247e95f   10Gi       RWO            standard       4m21s
+
+NAME                                                        CAPACITY   ACCESS MODES   RECLAIM POLICY   STATUS   CLAIM                    STORAGECLASS   REASON   AGE
+persistentvolume/pvc-04383fcb-9964-419e-9287-65a6692b7fff   10Gi       RWO            Delete           Bound    default/mysql-pv-claim   standard                4m17s
+persistentvolume/pvc-75b7e03f-d4b4-46e9-8393-c61be247e95f   10Gi       RWO            Delete           Bound    default/wp-pv-claim      standard                4m18s</pre>
 </div>
 </div>
 <div class="paragraph">
@@ -1362,8 +1353,8 @@ wp-pv-claim      Bound    pvc-1266556a-8cad-4afb-821c-aa94f780b9f5   20Gi       
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>kubectl get pods (full)
-kubectl get po</pre>
+<pre>k get pods (full)
+k get po</pre>
 </div>
 </div>
 <div class="paragraph">
@@ -1371,8 +1362,8 @@ kubectl get po</pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>kubectl get services &lt;name of the services&gt;
-kubectl get svc &lt;name of the services &gt;</pre>
+<pre>k get services &lt;name of the services&gt;
+k get svc &lt;name of the services &gt;</pre>
 </div>
 </div>
 <div class="paragraph">
@@ -1380,7 +1371,7 @@ kubectl get svc &lt;name of the services &gt;</pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>kubectl get svc
+<pre>k get svc
 NAME              TYPE           CLUSTER-IP     EXTERNAL-IP   PORT(S)        AGE
 kubernetes        ClusterIP      10.96.0.1      &lt;none&gt;        443/TCP        22h
 wordpress         LoadBalancer   10.96.212.79   &lt;pending&gt;     80:30782/TCP   12m
@@ -1395,7 +1386,7 @@ wordpress-mysql   ClusterIP      None           &lt;none&gt;        3306/TCP    
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>➜ kubectl get svc -A
+<pre>➜ k get svc -A
 NAMESPACE     NAME              TYPE           CLUSTER-IP     EXTERNAL-IP   PORT(S)                  AGE
 default       kubernetes        ClusterIP      10.96.0.1      &lt;none&gt;        443/TCP                  22h
 default       wordpress         LoadBalancer   10.96.212.79   &lt;pending&gt;     80:30782/TCP             12m
@@ -1408,7 +1399,7 @@ kube-system   kube-dns          ClusterIP      10.96.0.10     &lt;none&gt;      
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>kubectl get endpoints</pre>
+<pre>k get endpoints</pre>
 </div>
 </div>
 <div class="paragraph">
@@ -1416,7 +1407,7 @@ kube-system   kube-dns          ClusterIP      10.96.0.10     &lt;none&gt;      
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>➜ kubectl get endpoints
+<pre>➜ k get endpoints
 NAME              ENDPOINTS         AGE
 kubernetes        172.18.0.4:6443   22h
 wordpress         10.244.1.3:80     15m
@@ -1431,7 +1422,7 @@ wordpress-mysql   10.244.3.3:3306   15m</pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre> ➜ kubectl describe node kind-worker2
+<pre> ➜ k describe node kind-worker2
 Name:               kind-worker2
 Roles:              &lt;none&gt;
 Labels:             beta.kubernetes.io/arch=amd64
@@ -1522,7 +1513,7 @@ Check the cidr for that node.
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>kubectl port-forward svc/wordpress 8000:80</pre>
+<pre>k port-forward svc/wordpress 8000:80</pre>
 </div>
 </div>
 <div class="paragraph">
@@ -1530,7 +1521,7 @@ Check the cidr for that node.
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>kubectl port-forward svc/wordpress 8000:80
+<pre>k port-forward svc/wordpress 8000:80
 Forwarding from 127.0.0.1:8000 -&gt; 80
 Forwarding from [::1]:8000 -&gt; 80</pre>
 </div>
@@ -1552,7 +1543,7 @@ do not break out from the terminal otherwise you will not be able to access the 
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>kubectl describe po wordpress-mysql (look for the MYSQL_ROOT_PASSWORD).</pre>
+<pre>k describe po wordpress-mysql (look for the MYSQL_ROOT_PASSWORD).</pre>
 </div>
 </div>
 <div class="paragraph">
@@ -1560,7 +1551,7 @@ do not break out from the terminal otherwise you will not be able to access the 
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>➜ kubectl describe po wordpress-mysql
+<pre>➜ k describe po wordpress-mysql
 Name:         wordpress-mysql-dd6c4c7c9-mkxfp
 Namespace:    default
 Priority:     0
@@ -1641,7 +1632,7 @@ Run a new deployment<br></p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>kubectl create deployment grey --image=itlinux/httpd_grey</pre>
+<pre>k create deployment grey --image=itlinux/httpd_grey</pre>
 </div>
 </div>
 <div class="paragraph">
@@ -1649,7 +1640,7 @@ Run a new deployment<br></p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>kubectl get deploy
+<pre>k get deploy
 NAME              READY   UP-TO-DATE   AVAILABLE   AGE
 grey              1/1     1            0           13s
 wordpress         1/1     1            1           36m
@@ -1661,7 +1652,7 @@ wordpress-mysql   1/1     1            1           36m</pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>kubectl scale -h</pre>
+<pre>k scale -h</pre>
 </div>
 </div>
 <div class="paragraph">
@@ -1669,7 +1660,7 @@ wordpress-mysql   1/1     1            1           36m</pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>➜ kubectl scale -h
+<pre>➜ k scale -h
 Set a new size for a Deployment, ReplicaSet, Replication Controller, or StatefulSet.
 
  Scale also allows users to specify one or more preconditions for the scale action.
@@ -1732,7 +1723,7 @@ Use "kubectl options" for a list of global command-line options (applies to all 
 <div class="listingblock">
 <div class="title">Pods</div>
 <div class="content">
-<pre>➜ kubectl get pods
+<pre>➜ k get pods
 NAME                              READY   STATUS    RESTARTS   AGE
 grey-664f87894f-zr52n             1/1     Running   0          3m12s
 wordpress-9f58bb5bc-pdn7r         1/1     Running   0          39m
@@ -1744,7 +1735,7 @@ wordpress-mysql-dd6c4c7c9-mkxfp   1/1     Running   0          39m</pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>kubectl port-forward deployment/grey 8222:80</pre>
+<pre>k port-forward deployment/grey 8222:80</pre>
 </div>
 </div>
 <div class="paragraph">
@@ -1758,7 +1749,7 @@ wordpress-mysql-dd6c4c7c9-mkxfp   1/1     Running   0          39m</pre>
 <div class="listingblock">
 <div class="title">Scale our Pod</div>
 <div class="content">
-<pre>➜ kubectl scale --current-replicas=1 --replicas=3 deployment/grey</pre>
+<pre>➜ k scale --current-replicas=1 --replicas=3 deployment/grey</pre>
 </div>
 </div>
 <div class="paragraph">
@@ -1767,7 +1758,7 @@ wordpress-mysql-dd6c4c7c9-mkxfp   1/1     Running   0          39m</pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>➜ kubectl get pods
+<pre>➜ k get pods
 NAME                              READY   STATUS    RESTARTS   AGE
 grey-664f87894f-542xl             1/1     Running   0          13s
 grey-664f87894f-8wvm5             1/1     Running   0          13s
@@ -1781,7 +1772,7 @@ wordpress-mysql-dd6c4c7c9-mkxfp   1/1     Running   0          41m</pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>➜ kubectl scale --current-replicas=3 --replicas=1 deployment/grey</pre>
+<pre>➜ k scale --current-replicas=3 --replicas=1 deployment/grey</pre>
 </div>
 </div>
 <div class="paragraph">
@@ -1789,7 +1780,7 @@ wordpress-mysql-dd6c4c7c9-mkxfp   1/1     Running   0          41m</pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>➜ kubectl get pods
+<pre>➜ k get pods
 NAME                              READY   STATUS        RESTARTS   AGE
 grey-664f87894f-542xl             1/1     Running       0          2m13s
 grey-664f87894f-8wvm5             1/1     Terminating   0          2m13s
@@ -1815,7 +1806,7 @@ your application still runs :) even when we scaled down.
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>kubectl port-forward grey-5794d7f866-w8t98 8088:80</pre>
+<pre>k port-forward grey-5794d7f866-w8t98 8088:80</pre>
 </div>
 </div>
 <div class="paragraph">
@@ -1827,7 +1818,7 @@ Thanks</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2021-06-30 09:33:26 -0700
+Last updated 2021-07-30 09:16:21 -0700
 </div>
 </div>
 </body>
