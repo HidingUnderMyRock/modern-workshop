@@ -1323,11 +1323,29 @@ password:  6 bytes</pre>
 </div>
 </div>
 <div class="paragraph">
+<p>OUTPUT:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre> k get secrets mysql-pass-28kbb7fbdm -o jsonpath='{.data.password}' | base64 --decode
+ciao[student@ip-10-1-1-6]$</pre>
+</div>
+</div>
+<div class="paragraph">
 <p>To confirm the value in the POD we will exec into the POD.</p>
 </div>
 <div class="listingblock">
 <div class="content">
 <pre>k exec -it wordpress-mysql-5f7dc9d95d-zrzg5 -- env|grep -i pass</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>OUTPUT:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>k exec -it wordpress-mysql-5f7dc9d95d-zrzg5 -- env|grep -i pass
+MYSQL_ROOT_PASSWORD=ciao</pre>
 </div>
 </div>
 <div class="paragraph">
@@ -1826,7 +1844,7 @@ Thanks</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2021-07-30 09:25:57 -0700
+Last updated 2021-07-30 09:37:56 -0700
 </div>
 </div>
 </body>

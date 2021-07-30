@@ -697,9 +697,21 @@ Let's get verify the password we set. We will use the jsonpath for this command 
 k get secrets mysql-pass-28kbb7fbdm -o jsonpath="{.data.password}"|base64 --decode
 ----
 
+OUTPUT:
+----
+ k get secrets mysql-pass-28kbb7fbdm -o jsonpath='{.data.password}' | base64 --decode
+ciao[student@ip-10-1-1-6]$
+----
+
 To confirm the value in the POD we will exec into the POD.
 ----
 k exec -it wordpress-mysql-5f7dc9d95d-zrzg5 -- env|grep -i pass
+----
+
+OUTPUT:
+----
+k exec -it wordpress-mysql-5f7dc9d95d-zrzg5 -- env|grep -i pass
+MYSQL_ROOT_PASSWORD=ciao
 ----
 
 We do, however want to understand how storage is used on the container, and what we built with K8s. If you scroll up you will see the reference Volumes and the name used for that container. Therefore, we want to check that out.
