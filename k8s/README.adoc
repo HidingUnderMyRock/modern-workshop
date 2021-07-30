@@ -339,7 +339,7 @@ Thanks for using kind! 😊
 
 Check nodes
 ----
-➜ kubectl get nodes
+➜ k get nodes
 ----
 
 OUTPUT:  We can see the workshop name for the control plane.
